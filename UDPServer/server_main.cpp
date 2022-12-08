@@ -29,7 +29,7 @@ struct BulletInfo {
 };
 
 struct GameState {
-	std::vector<PlayerInfo> players;
+	std::vector<PlayerInfo[]> players;
 	std::vector<BulletInfo> bullets;
 };
 
