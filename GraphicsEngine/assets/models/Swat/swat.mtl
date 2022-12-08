@@ -1,0 +1,31 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Ch15_body
+Ns 179.999996
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1001_Normal.png
+map_Kd D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1001_Diffuse.png
+map_Ks D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1001_Specular.png
+map_Ns D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1001_Glossiness.png
+
+newmtl Ch15_body1
+Ns 179.999996
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.500000 0.500000 0.500000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1002_Normal.png
+map_Kd D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1002_Diffuse.png
+map_Ke D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1002_Emissive.png
+map_Ks D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1002_Specular.png
+map_Ns D:\\home\\app\\mixamo-mini\\tmp\\skins_7039a920-9b67-4215-b482-0f8be03b14ae.fbm\\Ch15_1002_Glossiness.png

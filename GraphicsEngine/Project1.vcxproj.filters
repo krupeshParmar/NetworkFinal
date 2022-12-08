@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="global">
+      <UniqueIdentifier>{9b4ab013-d7d3-4646-b130-e0436a3e0af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VAOManager">
+      <UniqueIdentifier>{8d04553b-3f55-4e12-b534-d921460a2bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshObject">
+      <UniqueIdentifier>{2a62e1df-20be-4439-8f3f-94df3a27f700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderManager">
+      <UniqueIdentifier>{4f116fef-41f5-478c-a8da-2e84b51b94f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CallbackFunctions">
+      <UniqueIdentifier>{c6f1cadb-3023-4b54-ab92-29a5bdd47ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{bb02f00f-2ec2-43a5-a13d-572761f922ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{30533182-1fac-4168-870c-46d5772c23ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{4eae0f97-d578-41d1-9ade-1ebbb4ded375}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="editor_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VAOManager\VAOManager.cpp">
+      <Filter>VAOManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshObject\MeshObject.cpp">
+      <Filter>MeshObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager\Shader.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager\ShaderManager.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="global\GlobalThings.cpp">
+      <Filter>global</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting\LightManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting\LightHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CallbackFunctions\KeyboardCallbackFunctions.cpp">
+      <Filter>CallbackFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Components\Transform.cpp">
+      <Filter>Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Components\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\misc\imgui_stdlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsSimulation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsDebugRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Shapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Spring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Components\BoxCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Components\RigidBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc_opengl.h">
+      <Filter>global</Filter>
+    </ClInclude>
+    <ClInclude Include="VAOManager\VAOManager.h">
+      <Filter>VAOManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager\ShaderManager.h">
+      <Filter>ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshObject\MeshObject.h">
+      <Filter>MeshObject</Filter>
+    </ClInclude>
+    <ClInclude Include="global\GlobalThings.h">
+      <Filter>global</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting\LightHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting\LightManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Components\iComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Components\Transform.h">
+      <Filter>Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Components\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl_glfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_impl_opengl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imgui\misc\imgui_stdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsSimulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BoundingBox\BoundingBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsDebugRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Shapes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Spring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Components\BoxCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Components\RigidBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\fragmentShader01.glsl" />
+    <None Include="assets\shaders\vertexShader01.glsl" />
+    <None Include="include\imgui\debuggers\imgui.gdb" />
+    <None Include="include\imgui\debuggers\imgui.natstepfilter" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Scenes\Scene1.xml" />
+    <Xml Include="Scenes\Prototype.xml" />
+    <Xml Include="Scenes\PhysicsProject2.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="include\imgui\debuggers\imgui.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\imgui\debuggers\README.txt" />
+  </ItemGroup>
+</Project>
