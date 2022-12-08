@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="proto_game.pb.cc" />
     <ClCompile Include="System\Components\RigidBody.cpp" />
     <ClCompile Include="System\Components\BoxCollider.cpp" />
     <ClCompile Include="include\imgui\imgui.cpp" />
@@ -191,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="proto_game.pb.h" />
     <ClInclude Include="System\Components\RigidBody.h" />
     <ClInclude Include="System\Components\BoxCollider.h" />
     <ClInclude Include="include\imgui\imconfig.h" />

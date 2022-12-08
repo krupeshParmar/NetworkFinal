@@ -1,6 +1,7 @@
 #include <iostream>
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define WIN32_LEAN_AND_MEAN
+#include "proto_game.pb.h"
 
 #include <Windows.h>
 #include <WinSock2.h>
@@ -113,7 +114,8 @@ int main()
 	g_RecvClientInfo.HaveInfo = false;
 	
 	// GAME LOOP HERE
-	
+
+
 	printf("Closing . . . \n");
 	closesocket(g_ServerInfo.socket);
 	WSACleanup();
