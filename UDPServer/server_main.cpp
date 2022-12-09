@@ -65,22 +65,12 @@ void Update() {
 
 }
 
-void ProcessKeyboardInput() {
-	if (_kbhit()) {
-		int ch = _getch();
-		if (ch == ESC)
-			gameOver = true;
+	while (1) {
+		if (!server.Update()) {
+			return 1;
+		}
 	}
-}
-
-int main()
-{
-	server.Initialize();
-
-	while (!gameOver) {
-		ProcessKeyboardInput();
-		Update();
-	}
+	
 	server.Shutdown();
 
 	return 0;

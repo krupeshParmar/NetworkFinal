@@ -42,6 +42,15 @@ struct GameStateMessage : public Message {
 	PlayerInfo player4;
 };
 
+struct PlayerStateMessage : public Message {
+	double id;
+	int count;
+	float posx, posz;
+	float bulx, bulz;
+	int input_sum;
+	bool isshot;
+};
+
 struct UserInputMessage : public Message {
 	bool W;
 	bool S;

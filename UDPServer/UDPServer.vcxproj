@@ -150,8 +150,8 @@
     <ClCompile Include="server_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="proto_game.pb.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="proto_game.pb.h" />
     <ClInclude Include="Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

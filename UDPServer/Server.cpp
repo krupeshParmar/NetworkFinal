@@ -1,5 +1,4 @@
 #include "Server.h"
-#include "proto_game.pb.h"
 
 #include <iostream>
 #define _WINSOCK_DEPRECATED_NO_WARNINGS

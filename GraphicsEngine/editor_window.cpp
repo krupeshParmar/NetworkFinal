@@ -162,6 +162,7 @@ int main()
 		std::cout << "Scene successfully loaded!" << std::endl;
 	}
 	else std::cout << "Scene failed to load!" << std::endl;
+	
 	theSceneEditor.RenderScene(window, shaderID);
 
 	
