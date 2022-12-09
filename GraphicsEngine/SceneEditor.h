@@ -17,7 +17,6 @@
 #include "global/GlobalThings.h"
 #include <imgui/misc/imgui_stdlib.h>
 #include "System/Components/BoxCollider.h"
-#include "Physics/PhysicsSystem.h"
 #include "Player.h"
 #define XMIN -37
 #define XMAX 37
@@ -44,7 +43,7 @@ public:
 	std::string logMessages = "";
 	std::string controlsText = "";
 
-	PhysicsSystem physicsSystem;
+	
 
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);

@@ -199,6 +199,8 @@ class SentState final :
     kPlayerIDFieldNumber = 1,
     kPosXFieldNumber = 3,
     kPosZFieldNumber = 4,
+    kTarXFieldNumber = 5,
+    kTarZFieldNumber = 6,
   };
   // required string requestID = 2;
   bool has_requestid() const;
@@ -257,6 +259,32 @@ class SentState final :
   void _internal_set_posz(float value);
   public:
 
+  // required float tarX = 5;
+  bool has_tarx() const;
+  private:
+  bool _internal_has_tarx() const;
+  public:
+  void clear_tarx();
+  float tarx() const;
+  void set_tarx(float value);
+  private:
+  float _internal_tarx() const;
+  void _internal_set_tarx(float value);
+  public:
+
+  // required float tarZ = 6;
+  bool has_tarz() const;
+  private:
+  bool _internal_has_tarz() const;
+  public:
+  void clear_tarz();
+  float tarz() const;
+  void set_tarz(float value);
+  private:
+  float _internal_tarz() const;
+  void _internal_set_tarz(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:proto_game.SentState)
  private:
   class _Internal;
@@ -273,6 +301,8 @@ class SentState final :
   ::PROTOBUF_NAMESPACE_ID::int32 playerid_;
   float posx_;
   float posz_;
+  float tarx_;
+  float tarz_;
   friend struct ::TableStruct_proto_5fgame_2eproto;
 };
 // -------------------------------------------------------------------
@@ -586,6 +616,62 @@ inline void SentState::_internal_set_posz(float value) {
 inline void SentState::set_posz(float value) {
   _internal_set_posz(value);
   // @@protoc_insertion_point(field_set:proto_game.SentState.posZ)
+}
+
+// required float tarX = 5;
+inline bool SentState::_internal_has_tarx() const {
+  bool value = (_has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool SentState::has_tarx() const {
+  return _internal_has_tarx();
+}
+inline void SentState::clear_tarx() {
+  tarx_ = 0;
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline float SentState::_internal_tarx() const {
+  return tarx_;
+}
+inline float SentState::tarx() const {
+  // @@protoc_insertion_point(field_get:proto_game.SentState.tarX)
+  return _internal_tarx();
+}
+inline void SentState::_internal_set_tarx(float value) {
+  _has_bits_[0] |= 0x00000010u;
+  tarx_ = value;
+}
+inline void SentState::set_tarx(float value) {
+  _internal_set_tarx(value);
+  // @@protoc_insertion_point(field_set:proto_game.SentState.tarX)
+}
+
+// required float tarZ = 6;
+inline bool SentState::_internal_has_tarz() const {
+  bool value = (_has_bits_[0] & 0x00000020u) != 0;
+  return value;
+}
+inline bool SentState::has_tarz() const {
+  return _internal_has_tarz();
+}
+inline void SentState::clear_tarz() {
+  tarz_ = 0;
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline float SentState::_internal_tarz() const {
+  return tarz_;
+}
+inline float SentState::tarz() const {
+  // @@protoc_insertion_point(field_get:proto_game.SentState.tarZ)
+  return _internal_tarz();
+}
+inline void SentState::_internal_set_tarz(float value) {
+  _has_bits_[0] |= 0x00000020u;
+  tarz_ = value;
+}
+inline void SentState::set_tarz(float value) {
+  _internal_set_tarz(value);
+  // @@protoc_insertion_point(field_set:proto_game.SentState.tarZ)
 }
 
 // -------------------------------------------------------------------

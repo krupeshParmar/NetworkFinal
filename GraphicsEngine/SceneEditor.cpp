@@ -1,5 +1,4 @@
 #include "SceneEditor.h"
-#include "Physics/BoundingBox/BoundingBox.h"
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -20,7 +19,6 @@ SceneEditor::~SceneEditor()
 
 bool SceneEditor::InitSceneRender(GLFWwindow* window)
 {
-	physicsSystem = PhysicsSystem();
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& imGuiIO = ImGui::GetIO();
@@ -36,6 +34,7 @@ bool SceneEditor::InitSceneRender(GLFWwindow* window)
 
 void SceneEditor::ProcessInput(GLFWwindow* window)
 {
+	int sum = 0;
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && gamePlay)
 	{
 		gamePlay = false;
@@ -379,7 +378,6 @@ void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 				}
 			}
 		}
-		this->physicsSystem.Update(deltaTime);
 		this->RenderUI(window,shaderID);
 		if (gamePlay)
 		{
@@ -769,7 +767,6 @@ void SceneEditor::RenderUI(GLFWwindow* window,GLuint shaderID)
 			if (ImGui::IsItemClicked())
 			{
 				RigidBody* rigidbody = new RigidBody();
-				physicsSystem.m_GameObjects.push_back(selectedGameObject);
 				selectedGameObject->components.push_back(rigidbody);
 			}
 		}
@@ -831,20 +828,8 @@ bool SceneEditor::ClickObject(glm::vec2 pos, bool hover)
 	// Calculate our position in world space
 	glm::vec3 pointInWorldSpace = glm::unProject(cursorPositionOnScreenSpace, viewMatrix, projectionMatrix, viewport);
 
-	Ray ray(mainCamera->transform->position, pointInWorldSpace);
 	GameObject* gameObject;
 
-	if (this->physicsSystem.RayCastClosest(ray, &gameObject, list_GameObjects))
-	{
-		if (gamePlay)
-		{
-			if (gameObject->name == "enemy")
-			{
-				
-			}
-		}
-		//selectedGameObject = gameObject;
-	}
 	return false;
 }
 
@@ -1508,7 +1493,6 @@ bool SceneEditor::LoadSceneFile(cVAOManager* pVAOManager, GLuint shaderID)
 								}
 							}
 							gameObject->components.push_back(rigidbody);
-							physicsSystem.m_GameObjects.push_back(gameObject);
 						}
 						if (componentNodeName == "boxcollider")
 						{

@@ -1,6 +1,5 @@
 #pragma once
 #include "iComponent.h"
-#include "../Physics/BoundingBox/BoundingBox.h"
 #include <string>
 #include <glm/vec3.hpp>
 class BoxCollider : public iComponent

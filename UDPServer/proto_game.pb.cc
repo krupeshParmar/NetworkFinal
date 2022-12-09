@@ -22,7 +22,9 @@ constexpr SentState::SentState(
   : requestid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , playerid_(0)
   , posx_(0)
-  , posz_(0){}
+  , posz_(0)
+  , tarx_(0)
+  , tarz_(0){}
 struct SentStateDefaultTypeInternal {
   constexpr SentStateDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -60,10 +62,14 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_proto_5fgame_2eproto::offsets[
   PROTOBUF_FIELD_OFFSET(::proto_game::SentState, requestid_),
   PROTOBUF_FIELD_OFFSET(::proto_game::SentState, posx_),
   PROTOBUF_FIELD_OFFSET(::proto_game::SentState, posz_),
+  PROTOBUF_FIELD_OFFSET(::proto_game::SentState, tarx_),
+  PROTOBUF_FIELD_OFFSET(::proto_game::SentState, tarz_),
   1,
   0,
   2,
   3,
+  4,
+  5,
   PROTOBUF_FIELD_OFFSET(::proto_game::RecvState, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::proto_game::RecvState, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -74,8 +80,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_proto_5fgame_2eproto::offsets[
   0,
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 10, -1, sizeof(::proto_game::SentState)},
-  { 14, 21, -1, sizeof(::proto_game::RecvState)},
+  { 0, 12, -1, sizeof(::proto_game::SentState)},
+  { 18, 25, -1, sizeof(::proto_game::RecvState)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -84,14 +90,15 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_proto_5fgame_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020proto_game.proto\022\nproto_game\"L\n\tSentSt"
+  "\n\020proto_game.proto\022\nproto_game\"h\n\tSentSt"
   "ate\022\020\n\010playerID\030\001 \002(\005\022\021\n\trequestID\030\002 \002(\t"
-  "\022\014\n\004posX\030\003 \002(\002\022\014\n\004posZ\030\004 \002(\002\"\036\n\tRecvStat"
-  "e\022\021\n\tgameState\030\001 \002(\t"
+  "\022\014\n\004posX\030\003 \002(\002\022\014\n\004posZ\030\004 \002(\002\022\014\n\004tarX\030\005 \002"
+  "(\002\022\014\n\004tarZ\030\006 \002(\002\"\036\n\tRecvState\022\021\n\tgameSta"
+  "te\030\001 \002(\t"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fgame_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fgame_2eproto = {
-  false, false, 140, descriptor_table_protodef_proto_5fgame_2eproto, "proto_game.proto", 
+  false, false, 168, descriptor_table_protodef_proto_5fgame_2eproto, "proto_game.proto", 
   &descriptor_table_proto_5fgame_2eproto_once, nullptr, 0, 2,
   schemas, file_default_instances, TableStruct_proto_5fgame_2eproto::offsets,
   file_level_metadata_proto_5fgame_2eproto, file_level_enum_descriptors_proto_5fgame_2eproto, file_level_service_descriptors_proto_5fgame_2eproto,
@@ -121,8 +128,14 @@ class SentState::_Internal {
   static void set_has_posz(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
+  static void set_has_tarx(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
+  }
+  static void set_has_tarz(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
+  }
   static bool MissingRequiredFields(const HasBits& has_bits) {
-    return ((has_bits[0] & 0x0000000f) ^ 0x0000000f) != 0;
+    return ((has_bits[0] & 0x0000003f) ^ 0x0000003f) != 0;
   }
 };
 
@@ -145,8 +158,8 @@ SentState::SentState(const SentState& from)
       GetArenaForAllocation());
   }
   ::memcpy(&playerid_, &from.playerid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&posz_) -
-    reinterpret_cast<char*>(&playerid_)) + sizeof(posz_));
+    static_cast<size_t>(reinterpret_cast<char*>(&tarz_) -
+    reinterpret_cast<char*>(&playerid_)) + sizeof(tarz_));
   // @@protoc_insertion_point(copy_constructor:proto_game.SentState)
 }
 
@@ -154,8 +167,8 @@ void SentState::SharedCtor() {
 requestid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&playerid_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&posz_) -
-    reinterpret_cast<char*>(&playerid_)) + sizeof(posz_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&tarz_) -
+    reinterpret_cast<char*>(&playerid_)) + sizeof(tarz_));
 }
 
 SentState::~SentState() {
@@ -190,10 +203,10 @@ void SentState::Clear() {
   if (cached_has_bits & 0x00000001u) {
     requestid_.ClearNonDefaultToEmpty();
   }
-  if (cached_has_bits & 0x0000000eu) {
+  if (cached_has_bits & 0x0000003eu) {
     ::memset(&playerid_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&posz_) -
-        reinterpret_cast<char*>(&playerid_)) + sizeof(posz_));
+        reinterpret_cast<char*>(&tarz_) -
+        reinterpret_cast<char*>(&playerid_)) + sizeof(tarz_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -241,6 +254,24 @@ const char* SentState::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
           _Internal::set_has_posz(&has_bits);
           posz_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // required float tarX = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 45)) {
+          _Internal::set_has_tarx(&has_bits);
+          tarx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // required float tarZ = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
+          _Internal::set_has_tarz(&has_bits);
+          tarz_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
@@ -304,6 +335,18 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_posz(), target);
   }
 
+  // required float tarX = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_tarx(), target);
+  }
+
+  // required float tarZ = 6;
+  if (cached_has_bits & 0x00000020u) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_tarz(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -338,13 +381,23 @@ size_t SentState::RequiredFieldsByteSizeFallback() const {
     total_size += 1 + 4;
   }
 
+  if (_internal_has_tarx()) {
+    // required float tarX = 5;
+    total_size += 1 + 4;
+  }
+
+  if (_internal_has_tarz()) {
+    // required float tarZ = 6;
+    total_size += 1 + 4;
+  }
+
   return total_size;
 }
 size_t SentState::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:proto_game.SentState)
   size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
     // required string requestID = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
@@ -357,6 +410,12 @@ size_t SentState::ByteSizeLong() const {
     total_size += 1 + 4;
 
     // required float posZ = 4;
+    total_size += 1 + 4;
+
+    // required float tarX = 5;
+    total_size += 1 + 4;
+
+    // required float tarZ = 6;
     total_size += 1 + 4;
 
   } else {
@@ -389,7 +448,7 @@ void SentState::MergeFrom(const SentState& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
       _internal_set_requestid(from._internal_requestid());
     }
@@ -401,6 +460,12 @@ void SentState::MergeFrom(const SentState& from) {
     }
     if (cached_has_bits & 0x00000008u) {
       posz_ = from.posz_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      tarx_ = from.tarx_;
+    }
+    if (cached_has_bits & 0x00000020u) {
+      tarz_ = from.tarz_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -431,8 +496,8 @@ void SentState::InternalSwap(SentState* other) {
       &other->requestid_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SentState, posz_)
-      + sizeof(SentState::posz_)
+      PROTOBUF_FIELD_OFFSET(SentState, tarz_)
+      + sizeof(SentState::tarz_)
       - PROTOBUF_FIELD_OFFSET(SentState, playerid_)>(
           reinterpret_cast<char*>(&playerid_),
           reinterpret_cast<char*>(&other->playerid_));

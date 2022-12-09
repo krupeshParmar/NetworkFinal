@@ -114,7 +114,18 @@ int main()
 	g_RecvClientInfo.HaveInfo = false;
 	
 	// GAME LOOP HERE
-
+	proto_game::SentState sentstate;
+	/*
+	*
+	* 
+	*	inputs
+	*   pos
+	*	newPos = pos, inputs
+	*	
+	* 
+	*	Client:
+	*		
+	*/
 
 	printf("Closing . . . \n");
 	closesocket(g_ServerInfo.socket);
