@@ -36,7 +36,10 @@ struct Message {
 };
 
 struct GameStateMessage : public Message {
-
+	PlayerInfo player1;
+	PlayerInfo player2;
+	PlayerInfo player3;
+	PlayerInfo player4;
 };
 
 struct UserInputMessage : public Message {
