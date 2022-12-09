@@ -12,9 +12,8 @@ int main()
 		}
 	}
 	
-<<<<<<< HEAD
 	// GAME LOOP HERE
-	proto_game::SentState sentstate;
+	//proto_game::GameState sentstate;
 	/*
 	*
 	* 
@@ -28,11 +27,8 @@ int main()
 	*/
 
 	printf("Closing . . . \n");
-	closesocket(g_ServerInfo.socket);
-	WSACleanup();
-=======
+
 	server.Shutdown();
->>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
 
 	return 0;
 }

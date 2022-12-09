@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include "proto_game.pb.h"
 
 class Server {
 

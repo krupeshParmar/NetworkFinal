@@ -146,19 +146,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="proto_game.pb.cc" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="Server.cpp" />
->>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
     <ClCompile Include="server_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="proto_game.pb.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="Common.h" />
+    <ClInclude Include="proto_game.pb.h" />
     <ClInclude Include="Server.h" />
->>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
