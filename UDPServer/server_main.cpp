@@ -41,14 +41,11 @@ void GetClientsInfo() {
 
 void Update() {
 	if (TimeDifference() > 1) {
-		//printf("Here =========================================== 1: \n");
 		return;
 	}
 
 	if (TimeDifference() < 100) {
 		currentTime += TimeDifference();
-		//printf("Here =========================================== 2: %f  \n", TimeDifference());
-		//printf("Here =========================================== 3: %f  \n", currentTime);
 	}
 
 	GetClientsInfo();
@@ -65,12 +62,22 @@ void Update() {
 
 }
 
-	while (1) {
-		if (!server.Update()) {
-			return 1;
-		}
+void ProcessKeyboardInput() {
+	if (_kbhit()) {
+		int ch = _getch();
+		if (ch == ESC)
+			gameOver = true;
 	}
-	
+}
+
+int main()
+{
+	server.Initialize();
+
+	while (!gameOver) {
+		ProcessKeyboardInput();
+		Update();
+	}
 	server.Shutdown();
 
 	return 0;
