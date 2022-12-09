@@ -114,7 +114,8 @@ int main()
 	g_RecvClientInfo.HaveInfo = false;
 	
 	// GAME LOOP HERE
-
+	proto_game::PlayerState playerObj;
+	playerObj.set_requestno(420);
 
 	printf("Closing . . . \n");
 	closesocket(g_ServerInfo.socket);
