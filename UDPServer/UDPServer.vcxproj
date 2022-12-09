@@ -146,10 +146,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="proto_game.pb.cc" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="server_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="proto_game.pb.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
