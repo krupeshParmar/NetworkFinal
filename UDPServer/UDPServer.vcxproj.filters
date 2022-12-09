@@ -13,17 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{355e7d8b-16ae-46f3-95b1-b7bd718d5927}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="server_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="proto_game.pb.cc">
+<<<<<<< HEAD
+=======
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+>>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="proto_game.pb.h">
+<<<<<<< HEAD
+=======
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+>>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

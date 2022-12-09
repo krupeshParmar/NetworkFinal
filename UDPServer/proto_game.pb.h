@@ -54,39 +54,39 @@ struct TableStruct_proto_5fgame_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fgame_2eproto;
 namespace proto_game {
-class RecvState;
-struct RecvStateDefaultTypeInternal;
-extern RecvStateDefaultTypeInternal _RecvState_default_instance_;
-class SentState;
-struct SentStateDefaultTypeInternal;
-extern SentStateDefaultTypeInternal _SentState_default_instance_;
+class GameState;
+struct GameStateDefaultTypeInternal;
+extern GameStateDefaultTypeInternal _GameState_default_instance_;
+class PlayerState;
+struct PlayerStateDefaultTypeInternal;
+extern PlayerStateDefaultTypeInternal _PlayerState_default_instance_;
 }  // namespace proto_game
 PROTOBUF_NAMESPACE_OPEN
-template<> ::proto_game::RecvState* Arena::CreateMaybeMessage<::proto_game::RecvState>(Arena*);
-template<> ::proto_game::SentState* Arena::CreateMaybeMessage<::proto_game::SentState>(Arena*);
+template<> ::proto_game::GameState* Arena::CreateMaybeMessage<::proto_game::GameState>(Arena*);
+template<> ::proto_game::PlayerState* Arena::CreateMaybeMessage<::proto_game::PlayerState>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace proto_game {
 
 // ===================================================================
 
-class SentState final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:proto_game.SentState) */ {
+class PlayerState final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:proto_game.PlayerState) */ {
  public:
-  inline SentState() : SentState(nullptr) {}
-  ~SentState() override;
-  explicit constexpr SentState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline PlayerState() : PlayerState(nullptr) {}
+  ~PlayerState() override;
+  explicit constexpr PlayerState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  SentState(const SentState& from);
-  SentState(SentState&& from) noexcept
-    : SentState() {
+  PlayerState(const PlayerState& from);
+  PlayerState(PlayerState&& from) noexcept
+    : PlayerState() {
     *this = ::std::move(from);
   }
 
-  inline SentState& operator=(const SentState& from) {
+  inline PlayerState& operator=(const PlayerState& from) {
     CopyFrom(from);
     return *this;
   }
-  inline SentState& operator=(SentState&& from) noexcept {
+  inline PlayerState& operator=(PlayerState&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -116,20 +116,20 @@ class SentState final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const SentState& default_instance() {
+  static const PlayerState& default_instance() {
     return *internal_default_instance();
   }
-  static inline const SentState* internal_default_instance() {
-    return reinterpret_cast<const SentState*>(
-               &_SentState_default_instance_);
+  static inline const PlayerState* internal_default_instance() {
+    return reinterpret_cast<const PlayerState*>(
+               &_PlayerState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(SentState& a, SentState& b) {
+  friend void swap(PlayerState& a, PlayerState& b) {
     a.Swap(&b);
   }
-  inline void Swap(SentState* other) {
+  inline void Swap(PlayerState* other) {
     if (other == this) return;
     if (GetOwningArena() == other->GetOwningArena()) {
       InternalSwap(other);
@@ -137,7 +137,7 @@ class SentState final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(SentState* other) {
+  void UnsafeArenaSwap(PlayerState* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -145,17 +145,17 @@ class SentState final :
 
   // implements Message ----------------------------------------------
 
-  inline SentState* New() const final {
-    return new SentState();
+  inline PlayerState* New() const final {
+    return new PlayerState();
   }
 
-  SentState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<SentState>(arena);
+  PlayerState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerState>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const SentState& from);
+  void CopyFrom(const PlayerState& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const SentState& from);
+  void MergeFrom(const PlayerState& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -172,13 +172,13 @@ class SentState final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(SentState* other);
+  void InternalSwap(PlayerState* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "proto_game.SentState";
+    return "proto_game.PlayerState";
   }
   protected:
-  explicit SentState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit PlayerState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
   static void ArenaDtor(void* object);
@@ -195,31 +195,20 @@ class SentState final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRequestIDFieldNumber = 2,
     kPlayerIDFieldNumber = 1,
+    kRequestNoFieldNumber = 2,
     kPosXFieldNumber = 3,
     kPosZFieldNumber = 4,
+<<<<<<< HEAD
     kTarXFieldNumber = 5,
     kTarZFieldNumber = 6,
+=======
+    kBulletposXFieldNumber = 5,
+    kBulletposZFieldNumber = 6,
+    kInputFieldNumber = 7,
+    kIsShotFieldNumber = 8,
+>>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
   };
-  // required string requestID = 2;
-  bool has_requestid() const;
-  private:
-  bool _internal_has_requestid() const;
-  public:
-  void clear_requestid();
-  const std::string& requestid() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_requestid(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_requestid();
-  PROTOBUF_MUST_USE_RESULT std::string* release_requestid();
-  void set_allocated_requestid(std::string* requestid);
-  private:
-  const std::string& _internal_requestid() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_requestid(const std::string& value);
-  std::string* _internal_mutable_requestid();
-  public:
-
   // required int32 playerID = 1;
   bool has_playerid() const;
   private:
@@ -231,6 +220,19 @@ class SentState final :
   private:
   ::PROTOBUF_NAMESPACE_ID::int32 _internal_playerid() const;
   void _internal_set_playerid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // required int32 requestNo = 2;
+  bool has_requestno() const;
+  private:
+  bool _internal_has_requestno() const;
+  public:
+  void clear_requestno();
+  ::PROTOBUF_NAMESPACE_ID::int32 requestno() const;
+  void set_requestno(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_requestno() const;
+  void _internal_set_requestno(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // required float posX = 3;
@@ -259,6 +261,7 @@ class SentState final :
   void _internal_set_posz(float value);
   public:
 
+<<<<<<< HEAD
   // required float tarX = 5;
   bool has_tarx() const;
   private:
@@ -286,6 +289,61 @@ class SentState final :
   public:
 
   // @@protoc_insertion_point(class_scope:proto_game.SentState)
+=======
+  // required float bulletposX = 5;
+  bool has_bulletposx() const;
+  private:
+  bool _internal_has_bulletposx() const;
+  public:
+  void clear_bulletposx();
+  float bulletposx() const;
+  void set_bulletposx(float value);
+  private:
+  float _internal_bulletposx() const;
+  void _internal_set_bulletposx(float value);
+  public:
+
+  // required float bulletposZ = 6;
+  bool has_bulletposz() const;
+  private:
+  bool _internal_has_bulletposz() const;
+  public:
+  void clear_bulletposz();
+  float bulletposz() const;
+  void set_bulletposz(float value);
+  private:
+  float _internal_bulletposz() const;
+  void _internal_set_bulletposz(float value);
+  public:
+
+  // required int32 input = 7;
+  bool has_input() const;
+  private:
+  bool _internal_has_input() const;
+  public:
+  void clear_input();
+  ::PROTOBUF_NAMESPACE_ID::int32 input() const;
+  void set_input(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_input() const;
+  void _internal_set_input(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // required bool isShot = 8;
+  bool has_isshot() const;
+  private:
+  bool _internal_has_isshot() const;
+  public:
+  void clear_isshot();
+  bool isshot() const;
+  void set_isshot(bool value);
+  private:
+  bool _internal_isshot() const;
+  void _internal_set_isshot(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:proto_game.PlayerState)
+>>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
  private:
   class _Internal;
 
@@ -297,34 +355,41 @@ class SentState final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr requestid_;
   ::PROTOBUF_NAMESPACE_ID::int32 playerid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 requestno_;
   float posx_;
   float posz_;
+<<<<<<< HEAD
   float tarx_;
   float tarz_;
+=======
+  float bulletposx_;
+  float bulletposz_;
+  ::PROTOBUF_NAMESPACE_ID::int32 input_;
+  bool isshot_;
+>>>>>>> 25538db8b9c3707e134ffd45ef2cc8c35ae9129c
   friend struct ::TableStruct_proto_5fgame_2eproto;
 };
 // -------------------------------------------------------------------
 
-class RecvState final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:proto_game.RecvState) */ {
+class GameState final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:proto_game.GameState) */ {
  public:
-  inline RecvState() : RecvState(nullptr) {}
-  ~RecvState() override;
-  explicit constexpr RecvState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline GameState() : GameState(nullptr) {}
+  ~GameState() override;
+  explicit constexpr GameState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  RecvState(const RecvState& from);
-  RecvState(RecvState&& from) noexcept
-    : RecvState() {
+  GameState(const GameState& from);
+  GameState(GameState&& from) noexcept
+    : GameState() {
     *this = ::std::move(from);
   }
 
-  inline RecvState& operator=(const RecvState& from) {
+  inline GameState& operator=(const GameState& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RecvState& operator=(RecvState&& from) noexcept {
+  inline GameState& operator=(GameState&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -354,20 +419,20 @@ class RecvState final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const RecvState& default_instance() {
+  static const GameState& default_instance() {
     return *internal_default_instance();
   }
-  static inline const RecvState* internal_default_instance() {
-    return reinterpret_cast<const RecvState*>(
-               &_RecvState_default_instance_);
+  static inline const GameState* internal_default_instance() {
+    return reinterpret_cast<const GameState*>(
+               &_GameState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(RecvState& a, RecvState& b) {
+  friend void swap(GameState& a, GameState& b) {
     a.Swap(&b);
   }
-  inline void Swap(RecvState* other) {
+  inline void Swap(GameState* other) {
     if (other == this) return;
     if (GetOwningArena() == other->GetOwningArena()) {
       InternalSwap(other);
@@ -375,7 +440,7 @@ class RecvState final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(RecvState* other) {
+  void UnsafeArenaSwap(GameState* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -383,17 +448,17 @@ class RecvState final :
 
   // implements Message ----------------------------------------------
 
-  inline RecvState* New() const final {
-    return new RecvState();
+  inline GameState* New() const final {
+    return new GameState();
   }
 
-  RecvState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<RecvState>(arena);
+  GameState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GameState>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const RecvState& from);
+  void CopyFrom(const GameState& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const RecvState& from);
+  void MergeFrom(const GameState& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -410,13 +475,13 @@ class RecvState final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(RecvState* other);
+  void InternalSwap(GameState* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "proto_game.RecvState";
+    return "proto_game.GameState";
   }
   protected:
-  explicit RecvState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit GameState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
   static void ArenaDtor(void* object);
@@ -433,27 +498,27 @@ class RecvState final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kGameStateFieldNumber = 1,
+    kStateFieldNumber = 1,
   };
-  // required string gameState = 1;
-  bool has_gamestate() const;
+  // required string state = 1;
+  bool has_state() const;
   private:
-  bool _internal_has_gamestate() const;
+  bool _internal_has_state() const;
   public:
-  void clear_gamestate();
-  const std::string& gamestate() const;
+  void clear_state();
+  const std::string& state() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_gamestate(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_gamestate();
-  PROTOBUF_MUST_USE_RESULT std::string* release_gamestate();
-  void set_allocated_gamestate(std::string* gamestate);
+  void set_state(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_state();
+  PROTOBUF_MUST_USE_RESULT std::string* release_state();
+  void set_allocated_state(std::string* state);
   private:
-  const std::string& _internal_gamestate() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_gamestate(const std::string& value);
-  std::string* _internal_mutable_gamestate();
+  const std::string& _internal_state() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_state(const std::string& value);
+  std::string* _internal_mutable_state();
   public:
 
-  // @@protoc_insertion_point(class_scope:proto_game.RecvState)
+  // @@protoc_insertion_point(class_scope:proto_game.GameState)
  private:
   class _Internal;
 
@@ -462,7 +527,7 @@ class RecvState final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr gamestate_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr state_;
   friend struct ::TableStruct_proto_5fgame_2eproto;
 };
 // ===================================================================
@@ -474,148 +539,230 @@ class RecvState final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// SentState
+// PlayerState
 
 // required int32 playerID = 1;
-inline bool SentState::_internal_has_playerid() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool SentState::has_playerid() const {
-  return _internal_has_playerid();
-}
-inline void SentState::clear_playerid() {
-  playerid_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 SentState::_internal_playerid() const {
-  return playerid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 SentState::playerid() const {
-  // @@protoc_insertion_point(field_get:proto_game.SentState.playerID)
-  return _internal_playerid();
-}
-inline void SentState::_internal_set_playerid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000002u;
-  playerid_ = value;
-}
-inline void SentState::set_playerid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_playerid(value);
-  // @@protoc_insertion_point(field_set:proto_game.SentState.playerID)
-}
-
-// required string requestID = 2;
-inline bool SentState::_internal_has_requestid() const {
+inline bool PlayerState::_internal_has_playerid() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool SentState::has_requestid() const {
-  return _internal_has_requestid();
+inline bool PlayerState::has_playerid() const {
+  return _internal_has_playerid();
 }
-inline void SentState::clear_requestid() {
-  requestid_.ClearToEmpty();
+inline void PlayerState::clear_playerid() {
+  playerid_ = 0;
   _has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& SentState::requestid() const {
-  // @@protoc_insertion_point(field_get:proto_game.SentState.requestID)
-  return _internal_requestid();
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::_internal_playerid() const {
+  return playerid_;
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void SentState::set_requestid(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
- requestid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto_game.SentState.requestID)
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::playerid() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.playerID)
+  return _internal_playerid();
 }
-inline std::string* SentState::mutable_requestid() {
-  std::string* _s = _internal_mutable_requestid();
-  // @@protoc_insertion_point(field_mutable:proto_game.SentState.requestID)
-  return _s;
-}
-inline const std::string& SentState::_internal_requestid() const {
-  return requestid_.Get();
-}
-inline void SentState::_internal_set_requestid(const std::string& value) {
+inline void PlayerState::_internal_set_playerid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _has_bits_[0] |= 0x00000001u;
-  requestid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  playerid_ = value;
 }
-inline std::string* SentState::_internal_mutable_requestid() {
-  _has_bits_[0] |= 0x00000001u;
-  return requestid_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+inline void PlayerState::set_playerid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.playerID)
 }
-inline std::string* SentState::release_requestid() {
-  // @@protoc_insertion_point(field_release:proto_game.SentState.requestID)
-  if (!_internal_has_requestid()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return requestid_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+
+// required int32 requestNo = 2;
+inline bool PlayerState::_internal_has_requestno() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
 }
-inline void SentState::set_allocated_requestid(std::string* requestid) {
-  if (requestid != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
-  } else {
-    _has_bits_[0] &= ~0x00000001u;
-  }
-  requestid_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), requestid,
-      GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set_allocated:proto_game.SentState.requestID)
+inline bool PlayerState::has_requestno() const {
+  return _internal_has_requestno();
+}
+inline void PlayerState::clear_requestno() {
+  requestno_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::_internal_requestno() const {
+  return requestno_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::requestno() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.requestNo)
+  return _internal_requestno();
+}
+inline void PlayerState::_internal_set_requestno(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000002u;
+  requestno_ = value;
+}
+inline void PlayerState::set_requestno(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_requestno(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.requestNo)
 }
 
 // required float posX = 3;
-inline bool SentState::_internal_has_posx() const {
+inline bool PlayerState::_internal_has_posx() const {
   bool value = (_has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
-inline bool SentState::has_posx() const {
+inline bool PlayerState::has_posx() const {
   return _internal_has_posx();
 }
-inline void SentState::clear_posx() {
+inline void PlayerState::clear_posx() {
   posx_ = 0;
   _has_bits_[0] &= ~0x00000004u;
 }
-inline float SentState::_internal_posx() const {
+inline float PlayerState::_internal_posx() const {
   return posx_;
 }
-inline float SentState::posx() const {
-  // @@protoc_insertion_point(field_get:proto_game.SentState.posX)
+inline float PlayerState::posx() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.posX)
   return _internal_posx();
 }
-inline void SentState::_internal_set_posx(float value) {
+inline void PlayerState::_internal_set_posx(float value) {
   _has_bits_[0] |= 0x00000004u;
   posx_ = value;
 }
-inline void SentState::set_posx(float value) {
+inline void PlayerState::set_posx(float value) {
   _internal_set_posx(value);
-  // @@protoc_insertion_point(field_set:proto_game.SentState.posX)
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.posX)
 }
 
 // required float posZ = 4;
-inline bool SentState::_internal_has_posz() const {
+inline bool PlayerState::_internal_has_posz() const {
   bool value = (_has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
-inline bool SentState::has_posz() const {
+inline bool PlayerState::has_posz() const {
   return _internal_has_posz();
 }
-inline void SentState::clear_posz() {
+inline void PlayerState::clear_posz() {
   posz_ = 0;
   _has_bits_[0] &= ~0x00000008u;
 }
-inline float SentState::_internal_posz() const {
+inline float PlayerState::_internal_posz() const {
   return posz_;
 }
-inline float SentState::posz() const {
-  // @@protoc_insertion_point(field_get:proto_game.SentState.posZ)
+inline float PlayerState::posz() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.posZ)
   return _internal_posz();
 }
-inline void SentState::_internal_set_posz(float value) {
+inline void PlayerState::_internal_set_posz(float value) {
   _has_bits_[0] |= 0x00000008u;
   posz_ = value;
 }
-inline void SentState::set_posz(float value) {
+inline void PlayerState::set_posz(float value) {
   _internal_set_posz(value);
-  // @@protoc_insertion_point(field_set:proto_game.SentState.posZ)
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.posZ)
+}
+
+// required float bulletposX = 5;
+inline bool PlayerState::_internal_has_bulletposx() const {
+  bool value = (_has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool PlayerState::has_bulletposx() const {
+  return _internal_has_bulletposx();
+}
+inline void PlayerState::clear_bulletposx() {
+  bulletposx_ = 0;
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline float PlayerState::_internal_bulletposx() const {
+  return bulletposx_;
+}
+inline float PlayerState::bulletposx() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.bulletposX)
+  return _internal_bulletposx();
+}
+inline void PlayerState::_internal_set_bulletposx(float value) {
+  _has_bits_[0] |= 0x00000010u;
+  bulletposx_ = value;
+}
+inline void PlayerState::set_bulletposx(float value) {
+  _internal_set_bulletposx(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.bulletposX)
+}
+
+// required float bulletposZ = 6;
+inline bool PlayerState::_internal_has_bulletposz() const {
+  bool value = (_has_bits_[0] & 0x00000020u) != 0;
+  return value;
+}
+inline bool PlayerState::has_bulletposz() const {
+  return _internal_has_bulletposz();
+}
+inline void PlayerState::clear_bulletposz() {
+  bulletposz_ = 0;
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline float PlayerState::_internal_bulletposz() const {
+  return bulletposz_;
+}
+inline float PlayerState::bulletposz() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.bulletposZ)
+  return _internal_bulletposz();
+}
+inline void PlayerState::_internal_set_bulletposz(float value) {
+  _has_bits_[0] |= 0x00000020u;
+  bulletposz_ = value;
+}
+inline void PlayerState::set_bulletposz(float value) {
+  _internal_set_bulletposz(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.bulletposZ)
+}
+
+// required int32 input = 7;
+inline bool PlayerState::_internal_has_input() const {
+  bool value = (_has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline bool PlayerState::has_input() const {
+  return _internal_has_input();
+}
+inline void PlayerState::clear_input() {
+  input_ = 0;
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::_internal_input() const {
+  return input_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerState::input() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.input)
+  return _internal_input();
+}
+inline void PlayerState::_internal_set_input(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _has_bits_[0] |= 0x00000040u;
+  input_ = value;
+}
+inline void PlayerState::set_input(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_input(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.input)
+}
+
+// required bool isShot = 8;
+inline bool PlayerState::_internal_has_isshot() const {
+  bool value = (_has_bits_[0] & 0x00000080u) != 0;
+  return value;
+}
+inline bool PlayerState::has_isshot() const {
+  return _internal_has_isshot();
+}
+inline void PlayerState::clear_isshot() {
+  isshot_ = false;
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline bool PlayerState::_internal_isshot() const {
+  return isshot_;
+}
+inline bool PlayerState::isshot() const {
+  // @@protoc_insertion_point(field_get:proto_game.PlayerState.isShot)
+  return _internal_isshot();
+}
+inline void PlayerState::_internal_set_isshot(bool value) {
+  _has_bits_[0] |= 0x00000080u;
+  isshot_ = value;
+}
+inline void PlayerState::set_isshot(bool value) {
+  _internal_set_isshot(value);
+  // @@protoc_insertion_point(field_set:proto_game.PlayerState.isShot)
 }
 
 // required float tarX = 5;
@@ -676,64 +823,64 @@ inline void SentState::set_tarz(float value) {
 
 // -------------------------------------------------------------------
 
-// RecvState
+// GameState
 
-// required string gameState = 1;
-inline bool RecvState::_internal_has_gamestate() const {
+// required string state = 1;
+inline bool GameState::_internal_has_state() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool RecvState::has_gamestate() const {
-  return _internal_has_gamestate();
+inline bool GameState::has_state() const {
+  return _internal_has_state();
 }
-inline void RecvState::clear_gamestate() {
-  gamestate_.ClearToEmpty();
+inline void GameState::clear_state() {
+  state_.ClearToEmpty();
   _has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& RecvState::gamestate() const {
-  // @@protoc_insertion_point(field_get:proto_game.RecvState.gameState)
-  return _internal_gamestate();
+inline const std::string& GameState::state() const {
+  // @@protoc_insertion_point(field_get:proto_game.GameState.state)
+  return _internal_state();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void RecvState::set_gamestate(ArgT0&& arg0, ArgT... args) {
+void GameState::set_state(ArgT0&& arg0, ArgT... args) {
  _has_bits_[0] |= 0x00000001u;
- gamestate_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:proto_game.RecvState.gameState)
+ state_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:proto_game.GameState.state)
 }
-inline std::string* RecvState::mutable_gamestate() {
-  std::string* _s = _internal_mutable_gamestate();
-  // @@protoc_insertion_point(field_mutable:proto_game.RecvState.gameState)
+inline std::string* GameState::mutable_state() {
+  std::string* _s = _internal_mutable_state();
+  // @@protoc_insertion_point(field_mutable:proto_game.GameState.state)
   return _s;
 }
-inline const std::string& RecvState::_internal_gamestate() const {
-  return gamestate_.Get();
+inline const std::string& GameState::_internal_state() const {
+  return state_.Get();
 }
-inline void RecvState::_internal_set_gamestate(const std::string& value) {
+inline void GameState::_internal_set_state(const std::string& value) {
   _has_bits_[0] |= 0x00000001u;
-  gamestate_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  state_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* RecvState::_internal_mutable_gamestate() {
+inline std::string* GameState::_internal_mutable_state() {
   _has_bits_[0] |= 0x00000001u;
-  return gamestate_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+  return state_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* RecvState::release_gamestate() {
-  // @@protoc_insertion_point(field_release:proto_game.RecvState.gameState)
-  if (!_internal_has_gamestate()) {
+inline std::string* GameState::release_state() {
+  // @@protoc_insertion_point(field_release:proto_game.GameState.state)
+  if (!_internal_has_state()) {
     return nullptr;
   }
   _has_bits_[0] &= ~0x00000001u;
-  return gamestate_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return state_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void RecvState::set_allocated_gamestate(std::string* gamestate) {
-  if (gamestate != nullptr) {
+inline void GameState::set_allocated_state(std::string* state) {
+  if (state != nullptr) {
     _has_bits_[0] |= 0x00000001u;
   } else {
     _has_bits_[0] &= ~0x00000001u;
   }
-  gamestate_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), gamestate,
+  state_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), state,
       GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set_allocated:proto_game.RecvState.gameState)
+  // @@protoc_insertion_point(field_set_allocated:proto_game.GameState.state)
 }
 
 #ifdef __GNUC__
