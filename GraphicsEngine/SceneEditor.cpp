@@ -35,6 +35,7 @@ bool SceneEditor::InitSceneRender(GLFWwindow* window)
 void SceneEditor::ProcessInput(GLFWwindow* window)
 {
 	int sum = 0;
+	bool isshot = false;
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && gamePlay)
 	{
 		gamePlay = false;
@@ -46,20 +47,68 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 		|| glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
 		const glm::vec2 click(xpos, ypos);
-
-		ClickObject(click);
-		mouseClicked = true;
+		isshot = true;
+		//ClickObject(click);
+		//mouseClicked = true;
 	}
 	else mouseClicked = false;
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 		mouseHoldDown = true;
 	else mouseHoldDown = false;
 
-	if (mouseHoldDown || gamePlay)
+	if (gamePlay)
+	{
+		float cameraSpeed;
+		glm::vec3 defFront = cameraFront;
+		defFront.y = 0.f;
+		
+		cameraSpeed = 2.5f * deltaTime;
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{
+			sum += 1;
+		}
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			sum += 10;
+		}
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			sum += 100;
+		}
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			sum += 1000;
+		}
+
+		if (mainCamera->transform->position.x > XMAX)
+			mainCamera->transform->position.x = XMAX;
+
+		if (mainCamera->transform->position.x < XMIN)
+			mainCamera->transform->position.x = XMIN;
+
+		if (mainCamera->transform->position.z > ZMAX)
+			mainCamera->transform->position.z = ZMAX;
+
+		if (mainCamera->transform->position.z < ZMIN)
+			mainCamera->transform->position.z = ZMIN;
+
+		PlayerStateMessage message;
+		message.messageID = glfwGetTime();
+		message.bulx = player->bullet->transform->position.x;
+		message.bulz = player->bullet->transform->position.z;
+		message.posx = player->player->transform->position.x;
+		message.posz = player->player->transform->position.z;
+		message.isshot = isshot;
+		message.input_sum = sum; 
+		message.count = player->client->g_MessageSendCount++;
+		message.id = player->client->GetID();
+		
+		player->client->SendUpdateToServer(message);
+	}
+
+	if (mouseHoldDown && !gamePlay)
 	{
 		glm::vec3 defFront = cameraFront;
-		if (gamePlay)
-			defFront.y = 0.f;
 		float cameraSpeed;
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && !gamePlay)
 			cameraSpeed = 10.5f * deltaTime;
@@ -72,32 +121,14 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 			mainCamera->transform->position -= cameraRight * cameraSpeed;
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			mainCamera->transform->position += cameraRight * cameraSpeed;
-		
-		if (gamePlay)
+
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)     // Down
 		{
-			if (mainCamera->transform->position.x > XMAX)
-				mainCamera->transform->position.x = XMAX;
-
-			if (mainCamera->transform->position.x < XMIN)
-				mainCamera->transform->position.x = XMIN;
-
-			if (mainCamera->transform->position.z > ZMAX)
-				mainCamera->transform->position.z = ZMAX;
-
-			if (mainCamera->transform->position.z < ZMIN)
-				mainCamera->transform->position.z = ZMIN;
+			mainCamera->transform->position.y -= cameraSpeed;
 		}
-
-		if (!gamePlay)
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)      // Up
 		{
-			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)     // Down
-			{
-				mainCamera->transform->position.y -= cameraSpeed;
-			}
-			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)      // Up
-			{
-				mainCamera->transform->position.y += cameraSpeed;
-			}
+			mainCamera->transform->position.y += cameraSpeed;
 		}
 	}
 }
@@ -212,7 +243,7 @@ void SceneEditor::DeleteGameObjects(std::vector<GameObject*> gameobjectList)
 void SceneEditor::GamePlayUpdate(GLFWwindow* window)
 {
 	player->Update(deltaTime);
-	//physicsSystem.UpdateStep(deltaTime);
+
 }
 
 void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
