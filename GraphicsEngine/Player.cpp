@@ -19,9 +19,11 @@ void Player::Shoot(glm::vec3 target)
 
 void Player::Update(float dt)
 {
-	this->client->CheckForUpdateFromGameServer();
-	this->player->transform->position.x += client->px / 16.f;
-	this->player->transform->position.z += client->pz / 16.f;
-	this->bullet->transform->position.x += client->bx / 8.f;
-	this->bullet->transform->position.z += client->bz / 8.f;
+	if (this->client->CheckForUpdateFromGameServer())
+	{
+		this->player->transform->position.x += client->px / 16.f;
+		this->player->transform->position.z += client->pz / 16.f;
+		this->bullet->transform->position.x += client->bx / 8.f;
+		this->bullet->transform->position.z += client->bz / 8.f;
+	}
 }

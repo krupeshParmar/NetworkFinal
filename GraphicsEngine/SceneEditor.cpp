@@ -91,19 +91,7 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 
 		if (mainCamera->transform->position.z < ZMIN)
 			mainCamera->transform->position.z = ZMIN;
-
-		PlayerStateMessage message;
-		message.messageID = glfwGetTime();
-		message.bulx = player->bullet->transform->position.x;
-		message.bulz = player->bullet->transform->position.z;
-		message.posx = player->player->transform->position.x;
-		message.posz = player->player->transform->position.z;
-		message.isshot = isshot;
-		message.input_sum = sum; 
-		message.count = player->client->g_MessageSendCount++;
-		message.id = player->client->GetID();
 		
-		player->client->SendUpdateToServer(message);
 	}
 
 	if (mouseHoldDown && !gamePlay)
@@ -131,6 +119,8 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 			mainCamera->transform->position.y += cameraSpeed;
 		}
 	}
+	player->message.isshot = isshot;
+	player->message.input_sum = sum;
 }
 
 
@@ -242,8 +232,15 @@ void SceneEditor::DeleteGameObjects(std::vector<GameObject*> gameobjectList)
 
 void SceneEditor::GamePlayUpdate(GLFWwindow* window)
 {
+	player->message.messageID = glfwGetTime();
+	player->message.bulx = player->bullet->transform->position.x;
+	player->message.bulz = player->bullet->transform->position.z;
+	player->message.posx = player->player->transform->position.x;
+	player->message.posz = player->player->transform->position.z;
+	player->message.count = player->client->g_MessageSendCount++;
+	player->message.id = player->client->GetID();
+	player->client->SendUpdateToServer(player->message);
 	player->Update(deltaTime);
-
 }
 
 void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
@@ -409,7 +406,7 @@ void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 				}
 			}
 		}
-		this->RenderUI(window,shaderID);
+		this->RenderUI(window,shaderID); 
 		if (gamePlay)
 		{
 			GamePlayUpdate(window);
@@ -466,7 +463,7 @@ void SceneEditor::RenderUI(GLFWwindow* window,GLuint shaderID)
 	{
 		if (gamePlay)
 		{
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			InitGameScene();
 			std::cout << "Gameplay stareted";
 		}

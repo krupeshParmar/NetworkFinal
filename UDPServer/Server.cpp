@@ -1,7 +1,6 @@
 #include "Server.h"
 
 #include <iostream>
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define WIN32_LEAN_AND_MEAN
 
 #include <Windows.h>
@@ -47,13 +46,87 @@ int Server::Initialize() {
 
 bool Server::Update() {
 
-	const int bufsize = sizeof(UserInputMessage);
-	char buf[bufsize];
+	/*const int bufsize = sizeof(UserInputMessage);
+	char buf[bufsize];*/
+	this->GetInforFromClients();
+	this->UpdatePlayerState();
+	this->UpdateClients(1);
+	return true;
+}
+
+int Server::Receive()
+{
+	/*
+	//const int bufsize = sizeof(UserInputMessage);
+	//char buf[bufsize];
+
+	//int result = recvfrom(
+	//	g_ServerInfo.socket, 
+	//	buf, 
+	//	bufsize, 
+	//	0, 
+	//	(SOCKADDR*)&g_RecvClientInfo.clientAddr, 
+	//	&g_RecvClientInfo.clientAddrSize);
+	//
+	//if (result == SOCKET_ERROR)
+	//{
+	//	if (WSAGetLastError() != WSAEWOULDBLOCK)
+	//	{
+	//		printf("recv failed with error: %d\n", WSAGetLastError());
+	//		closesocket(g_ServerInfo.socket);
+	//		WSACleanup();
+	//		//g_doQuit = true; Remove client from connection.
+	//	}
+	//	return 0;
+	//}
+
+	//if (result == 0) {
+	//	//TODO remove from socket
+	//	return 0;
+	//}
+
+	//ClientInfo clientInfo;
+	//USHORT port = g_RecvClientInfo.clientAddr.sin_port;
+	//if (!FindPlayer(port, clientInfo)) {
+
+	//	USHORT numPlayersConnected = g_ClientInfo.size();
+
+	//	clientInfo.clientAddr = g_RecvClientInfo.clientAddr;
+	//	clientInfo.clientAddrSize = g_RecvClientInfo.clientAddrSize;
+	//	clientInfo.HaveInfo = true;
+	//	clientInfo.playerID = numPlayersConnected;
+
+	//	g_ClientInfo.push_back(clientInfo);
+	//	g_PlayerMessages.push_back(UserInputMessage());
+	//}
+	//UserInputMessage& userInputMessage = g_PlayerMessages[clientInfo.playerID];
+	//std::string serializedPlayerState;
+
+	//memcpy(&userInputMessage, (const void*)buf, bufsize);
+	////memcpy((char*)serializedPlayerState.data(), (const void*)buf, bufsize);
+
+	//proto_game::PlayerState playerState = proto_game::PlayerState();
+	//bool succ = playerState.ParseFromString(serializedPlayerState);
+
+	//if (!succ) {
+	//	return 1;
+	//}
+	//else {
+	//	printf("Bulletposx: %.2f, bulletposz: %.2f, input: %d, isShot: %d\n", playerState.bulletposx(), playerState.bulletposz(), playerState.input(), playerState.isshot());
+	//}
+
+	//int hasUserInput = userInputMessage.W || userInputMessage.A || userInputMessage.S || userInputMessage.D;
+
+	//if (hasUserInput)
+	//	printf("%d RECV: [%d: %d] %d %d %d %d\n", g_Iteration++, clientInfo.playerID, userInputMessage.messageID,
+	//		userInputMessage.W, userInputMessage.A, userInputMessage.S, userInputMessage.D);
+	*/
+	char buf[512];
 
 	int recvResult = recvfrom(
 		g_ServerInfo.socket,
 		buf,
-		bufsize,
+		512,
 		0,
 		(SOCKADDR*)&g_RecvClientInfo.clientAddr,
 		&g_RecvClientInfo.clientAddrSize
@@ -66,87 +139,66 @@ bool Server::Update() {
 			printf("recv failed with error: %d\n", WSAGetLastError());
 			closesocket(g_ServerInfo.socket);
 			WSACleanup();
-			return false;
 		}
+		return 0;
 	}
-
-	std::cout << "recvbuffer: " << buf;
-
-	g_RecvClientInfo.clientAddrSize = sizeof(g_RecvClientInfo.clientAddr);
-	g_RecvClientInfo.HaveInfo = false;
-
-	// GAME LOOP HERE
-	proto_game::PlayerState playerObj;
-	playerObj.set_requestno(420);
-}
-
-int Server::Receive()
-{
-	const int bufsize = sizeof(UserInputMessage);
-	char buf[bufsize];
-
-	int result = recvfrom(
-		g_ServerInfo.socket, 
-		buf, 
-		bufsize, 
-		0, 
-		(SOCKADDR*)&g_RecvClientInfo.clientAddr, 
-		&g_RecvClientInfo.clientAddrSize);
-	
-	if (result == SOCKET_ERROR)
+	if (recvResult == 0)
 	{
-		if (WSAGetLastError() != WSAEWOULDBLOCK)
-		{
-			printf("recv failed with error: %d\n", WSAGetLastError());
-			closesocket(g_ServerInfo.socket);
-			WSACleanup();
-			//g_doQuit = true; Remove client from connection.
-		}
 		return 0;
 	}
-
-	if (result == 0) {
-		//TODO remove from socket
-		return 0;
-	}
-
-	ClientInfo clientInfo;
+	std::cout << "Reached here!" << std::endl;
+	// ----
+	proto_game::PlayerState playerState;
 	USHORT port = g_RecvClientInfo.clientAddr.sin_port;
-	if (!FindPlayer(port, clientInfo)) {
+	ClientInfo clientInfo;
+	if (FindPlayer(port, clientInfo) == false) {
+		// The port does NOT exist in the map.
+		// Add the player to the map
+		double numPlayersConnected = g_ClientInfo.size();
 
-		USHORT numPlayersConnected = g_ClientInfo.size();
-
+		// Create new client info
 		clientInfo.clientAddr = g_RecvClientInfo.clientAddr;
 		clientInfo.clientAddrSize = g_RecvClientInfo.clientAddrSize;
 		clientInfo.HaveInfo = true;
 		clientInfo.playerID = numPlayersConnected;
 
+		// Store the client info
 		g_ClientInfo.push_back(clientInfo);
-		g_PlayerMessages.push_back(UserInputMessage());
+		g_PlayerMessages.push_back(PlayerStateMessage());
 	}
-	UserInputMessage& userInputMessage = g_PlayerMessages[clientInfo.playerID];
-	std::string serializedPlayerState;
-
-	memcpy(&userInputMessage, (const void*)buf, bufsize);
-	//memcpy((char*)serializedPlayerState.data(), (const void*)buf, bufsize);
-
-	proto_game::PlayerState playerState = proto_game::PlayerState();
-	bool succ = playerState.ParseFromString(serializedPlayerState);
-
-	if (!succ) {
-		return 1;
+	if (playerState.ParseFromString(buf))
+	{
+		std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
+		/*g_RecvClientInfo.clientAddrSize = sizeof(g_RecvClientInfo.clientAddr);
+		g_RecvClientInfo.HaveInfo = true;*/
+		PlayerStateMessage playerStateMessage;
+		playerStateMessage.bulx = playerState.bulletposx();
+		playerStateMessage.bulz = playerState.bulletposz();
+		playerStateMessage.posx = playerState.posx();
+		playerStateMessage.posz = playerState.posz();
+		playerStateMessage.count = playerState.requestno();
+		playerStateMessage.id = playerState.playerid();
+		playerStateMessage.input_sum = playerState.input();
+		playerStateMessage.isshot = playerState.isshot();
+		g_PlayerMessages[clientInfo.playerID] = playerStateMessage;
 	}
-	else {
-		printf("Bulletposx: %.2f, bulletposz: %.2f, input: %d, isShot: %d\n", playerState.bulletposx(), playerState.bulletposz(), playerState.input(), playerState.isshot());
-	}
-
-	int hasUserInput = userInputMessage.W || userInputMessage.A || userInputMessage.S || userInputMessage.D;
-
-	if (hasUserInput)
-		printf("%d RECV: [%d: %d] %d %d %d %d\n", g_Iteration++, clientInfo.playerID, userInputMessage.messageID,
-			userInputMessage.W, userInputMessage.A, userInputMessage.S, userInputMessage.D);
 
 	return 1;
+}
+
+
+void Server::GetInforFromClients()
+{
+	int recvCount = 0;
+	bool stopReading = false;
+	while (!stopReading)
+	{
+		int recvresult = Receive();
+		recvCount += recvresult;
+
+		if (recvresult == 0)
+			stopReading = true;
+	}
 }
 
 void Server::Shutdown() {
@@ -158,34 +210,139 @@ void Server::Shutdown() {
 void Server::UpdatePlayerState()
 {
 	for (int i = 0; i < g_PlayerMessages.size(); i++) {
-		UserInputMessage& playerMessage = g_PlayerMessages[i];
-		PlayerInfo& playerInfo = GetPlayerInfoReferenceById(i);
+		PlayerStateMessage& playerMessage = g_PlayerMessages[i];
+		bool press_w = false, press_s = false, press_a = false, press_d = false;
+		if (playerMessage.input_sum >= 1000)
+		{
+			press_d = true;
+			int sum = playerMessage.input_sum - 1000;
+			if (sum > 0)
+			{
+				switch (sum)
+				{
+				case 1:
+					press_w = true;
+					break;
+				case 10:
+					press_s = true;
+					break;
+				case 100:
+					press_a = true;
+					break;
 
-		// Update the game state
-		if (playerMessage.A) {
-			playerInfo.x += 10.f;
-		}
-		if (playerMessage.D) {
-			playerInfo.x -= 10.f;
-		}
-		if (playerMessage.W) {
-			playerInfo.z += 10.f;
-		}
-		if (playerMessage.S) {
-			playerInfo.z -= 10.f;
-		}
+				case 11:
+					press_w = true;
+					press_s = true;
+					break;
 
-		playerMessage.W = 0;
-		playerMessage.A = 0;
-		playerMessage.S = 0;
-		playerMessage.D = 0;
+				case 101:
+					press_a = true;
+					press_w = true;
+					break;
+
+				case 111:
+					press_a = true;
+					press_w = true;
+					press_d = true;
+					break;
+
+				}
+			}
+		}
+		else if (playerMessage.input_sum >= 100)
+		{
+			press_a = true;
+			if (playerMessage.input_sum - 100 > 0)
+			{
+				int sum = playerMessage.input_sum - 100;
+				if (sum > 100)
+				{
+					switch (sum)
+					{
+					case 1:
+						press_w = true;
+						break;
+					case 10:
+						press_s = true;
+						break;
+					case 100:
+						press_a = true;
+						break;
+
+					case 11:
+						press_w = true;
+						press_s = true;
+						break;
+					}
+				}
+			}
+			else if (playerMessage.input_sum >= 10)
+			{
+				press_s = true;
+				int sum = playerMessage.input_sum - 10;
+				if (sum > 10)
+				{
+					switch (sum)
+					{
+					case 1:
+						press_w = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				press_w = true;
+			}
+
+
+		}
+		if (press_w)
+		{
+			playerMessage.posz += 10.f;
+		}
+		if (press_s)
+		{
+			playerMessage.posz -= 10.f;
+		}
+		if (press_a)
+		{
+			playerMessage.posx -= 10.f;
+		}
+		if (press_d)
+		{
+			playerMessage.posx += 10.f;
+		}
 	}
 }
 
 void Server::UpdateClients(unsigned int messageId)
 {
-	int gameStateSize = sizeof(GameStateMessage);
-	g_GameStateMessage.messageID = messageId;
+	proto_game::GameState game_state;
+	std::string state = "";
+	for (int i = 0; i < g_PlayerMessages.size(); i++)
+	{
+		PlayerStateMessage playerStateMessage = g_PlayerMessages[i];
+		state += std::to_string(g_PlayerMessages.size());
+		state += ",";
+		state += std::to_string(playerStateMessage.id);
+		state += ",";
+		state += std::to_string(playerStateMessage.count);
+		state += ",";
+		state += std::to_string(playerStateMessage.posx);
+		state += ",";
+		state += std::to_string(playerStateMessage.posz);
+		state += ",";
+		state += std::to_string(playerStateMessage.bulx);
+		state += ",";
+		state += std::to_string(playerStateMessage.bulz);
+		if (i != g_PlayerMessages.size() - 1)
+			state += ".";
+		else state += "!";
+	}
+	game_state.set_state(state);
+	std::string buffer = "";
+	game_state.SerializeToString(&buffer);
 
 	//printf("SEND: { %.2f, %.2f }\n", g_GameStateMessage.player.x, g_GameStateMessage.player.y);
 
@@ -193,8 +350,8 @@ void Server::UpdateClients(unsigned int messageId)
 		const ClientInfo& clientInfo = g_ClientInfo[i];
 		int sendResult = sendto(
 			g_ServerInfo.socket,
-			(const char*)&g_GameStateMessage,
-			gameStateSize,
+			(const char*)buffer.c_str(),
+			sizeof(buffer),
 			0,
 			(SOCKADDR*)&clientInfo.clientAddr,
 			clientInfo.clientAddrSize
@@ -213,6 +370,7 @@ void Server::UpdateClients(unsigned int messageId)
 			return;
 		}
 	}
+	//g_PlayerMessages.clear();
 }
 
 int Server::Bind()
@@ -290,13 +448,13 @@ bool Server::FindPlayer(int port, ClientInfo& clientInfo)
 	return false;
 }
 
-PlayerInfo& Server::GetPlayerInfoReferenceById(USHORT id)
-{
-	if (id == 0) return g_GameStateMessage.player1;
-	if (id == 1) return g_GameStateMessage.player2;
-	if (id == 2) return g_GameStateMessage.player3;
-	if (id == 3) return g_GameStateMessage.player4;
-
-	assert(-1);
-	return g_GameStateMessage.player1;
-}
+//PlayerInfo& Server::GetPlayerInfoReferenceById(USHORT id)
+//{
+//	if (id == 0) return g_GameStateMessage.player1;
+//	if (id == 1) return g_GameStateMessage.player2;
+//	if (id == 2) return g_GameStateMessage.player3;
+//	if (id == 3) return g_GameStateMessage.player4;
+//
+//	assert(-1);
+//	return g_GameStateMessage.player1;
+//}

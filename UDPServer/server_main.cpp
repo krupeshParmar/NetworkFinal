@@ -72,11 +72,15 @@ void ProcessKeyboardInput() {
 
 int main()
 {
+	server = Server();
 	server.Initialize();
 
 	while (!gameOver) {
 		ProcessKeyboardInput();
-		Update();
+		if (server.Update())
+		{
+			std::cout << ".";
+		}
 	}
 	server.Shutdown();
 

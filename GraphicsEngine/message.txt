@@ -1,0 +1,107 @@
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[libprotobuf ERROR E:\work\fanshawe\21F\NET\workshops\protobuf\protobuf-3.18.1\src\google\protobuf\wire_format_lite.cc:577] String field 'proto_game.GameState.state' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes.
+PosX, Posz-37, -2
+[

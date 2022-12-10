@@ -14,5 +14,6 @@ public:
 	void Shoot(glm::vec3 target);
 	void Update(float dt);
 	Client* client;
+	PlayerStateMessage message;
 };
 

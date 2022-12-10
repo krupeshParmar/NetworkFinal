@@ -1,10 +1,9 @@
 #include "Client.h"
-
-
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "Client.h"
 #include <Windows.h>
 #pragma comment(lib, "Ws2_32.lib")
+#pragma warning(disable:4996) 
 
 Client::Client()
 	: m_ServerSocket(INVALID_SOCKET)
@@ -76,7 +75,7 @@ void Client::SetServerAddressAndPort(std::string address, int port)
 		return;
 
 	m_AddrInfo.sin_family = AF_INET;
-	m_AddrInfo.sin_port = htons(port);
+	m_AddrInfo.sin_port = htons(port); 
 	m_AddrInfo.sin_addr.s_addr = inet_addr(address.c_str());
 
 	m_AddressSize = sizeof(m_AddrInfo);
@@ -87,11 +86,12 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 	if (m_ClientState != Initialized)
 		return false;
 
-	if (m_CurrentTime < m_NextSendTime)
+	/*if (m_CurrentTime < m_NextSendTime)
 		return false;
-	m_NextSendTime += m_SendTimeDelta;
+	m_NextSendTime += m_SendTimeDelta;*/
 
 	proto_game::PlayerState playerState;
+
 	playerState.set_playerid(data.id);
 	playerState.set_requestno(data.count);
 	playerState.set_posx(data.posx);
@@ -102,7 +102,7 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 	playerState.set_input(data.input_sum);
 	std::string* buffer = new std::string();
 	playerState.SerializeToString(buffer);
-
+	std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
 
 	int sendResult = sendto(
 		m_ServerSocket,			// the SOCKET we created for our server
@@ -114,7 +114,8 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 		(SOCKADDR*)&m_AddrInfo, // The address of our server set in SetServerAddressAndPort
 		m_AddressSize			// The length of our AddrInfo
 	);
-
+	if (sendResult > 8)
+		int breakme = 0;
 	if (sendResult == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() != WSAEWOULDBLOCK)
@@ -177,19 +178,52 @@ bool Client::CheckForUpdateFromGameServer()
 	std::string game_state = game.state();
 	int count = 0;
 
-	for (int i = 0; i < game_state.size(); i+=14)
+	std::string ch = "";
+	while (ch != "!" && ch != "")
 	{
-		int no_players = game_state[i];
-		if (this->ID == game_state[i + 2])
+		if (ch == ".")
+			count++;
+		ch = game_state[count++];
+		int no_players = std::stoi(ch);
+		count++;
+		ch = game_state[count++];
+		float id = std::stof(ch);
+		count++;
+		int mes_count = game_state[count++];
+		count++;
+		ch = "";
+		while (game_state[count] != ',')
 		{
-			int mesCount = game_state[i + 4];
-			this->px = game_state[i + 6];
-			this->pz = game_state[i + 8];
-			this->bx = game_state[i + 10];
-			this->bz = game_state[i + 12];
+			ch += game_state[count++];
 		}
-		else {
-
+		count++;
+		float posx = std::stof(ch);
+		ch = "";
+		while (game_state[count] != ',')
+		{
+			ch += game_state[count++];
+		}
+		count++;
+		float posz = std::stof(ch);
+		ch = "";
+		while (game_state[count] != ',')
+		{
+			ch += game_state[count++];
+		}
+		count++;
+		float bulx = std::stof(ch);
+		ch = "";
+		while (game_state[count] != '!' || game_state[count] != '.')
+		{
+			ch += game_state[count++];
+		}
+		float bulz = std::stof(ch);
+		if (id == this->ID)
+		{
+			this->px = posx;
+			this->pz = posz;
+			this->bx = bulx;
+			this->bz = bulz;
 		}
 	}
 
