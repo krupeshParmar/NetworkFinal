@@ -12,13 +12,12 @@ struct ClientInfo {
 	bool HaveInfo;
 	sockaddr_in clientAddr;
 	int clientAddrSize;
-	double playerID;
+	USHORT playerID;
 };
 
 struct Message {
 	unsigned int messageID;
 };
-
 
 struct PlayerStateMessage : public Message {
 	double id;
@@ -28,7 +27,6 @@ struct PlayerStateMessage : public Message {
 	int input_sum;
 	bool isshot;
 };
-
 
 struct GameState : public Message
 {

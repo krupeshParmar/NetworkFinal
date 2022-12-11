@@ -91,7 +91,7 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 	m_NextSendTime += m_SendTimeDelta;*/
 
 	proto_game::PlayerState playerState;
-
+	
 	playerState.set_playerid(data.id);
 	playerState.set_requestno(data.count);
 	playerState.set_posx(data.posx);
@@ -100,16 +100,16 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 	playerState.set_bulletposz(data.bulz);
 	playerState.set_isshot(data.isshot);
 	playerState.set_input(data.input_sum);
-	std::string* buffer = new std::string();
-	playerState.SerializeToString(buffer);
+	std::string buffer = "";
+	buffer = playerState.SerializeAsString();
 	std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
 
 	int sendResult = sendto(
 		m_ServerSocket,			// the SOCKET we created for our server
-		(const char*)buffer->c_str(),		// The data we are sending
+		(const char*)&data,		// The data we are sending
 								// This is a POINTER to a UserInputMessage type
 								// casted to a const char pointer.
-		sizeof(buffer),			// The length of the message we are sending in bytes
+		sizeof(data),			// The length of the message we are sending in bytes
 		0,						// We are not setting any flags
 		(SOCKADDR*)&m_AddrInfo, // The address of our server set in SetServerAddressAndPort
 		m_AddressSize			// The length of our AddrInfo
@@ -145,7 +145,7 @@ bool Client::CheckForUpdateFromGameServer()
 	//m_NextRecvTime += m_RecvTimeDelta;
 
 	const int BUF_SIZE = 512;	// Size of the buffer, that is the maximum we can recv in this call
-	char buf[512];
+	char buf[BUF_SIZE];
 
 	int recvResult = recvfrom(m_ServerSocket, buf, BUF_SIZE, 0, (SOCKADDR*)&m_AddrInfo, &m_AddressSize);
 	if (recvResult == SOCKET_ERROR)
@@ -173,9 +173,12 @@ bool Client::CheckForUpdateFromGameServer()
 
 		return false;
 	}
-	proto_game::GameState game;
-	game.ParseFromString(buf);
-	std::string game_state = game.state();
+	std::string buffer = std::string(buf);
+	GameState gameState;
+	memcpy(&gameState, (const void*)buf, buffer.size());
+	/*proto_game::GameState game;
+	game.ParseFromString(buf);*/
+	std::string game_state = gameState.game_state;
 	int count = 0;
 
 	std::string ch = "";

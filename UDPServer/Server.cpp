@@ -146,7 +146,6 @@ int Server::Receive()
 	{
 		return 0;
 	}
-	std::cout << "Reached here!" << std::endl;
 	// ----
 	proto_game::PlayerState playerState;
 	USHORT port = g_RecvClientInfo.clientAddr.sin_port;
@@ -154,7 +153,7 @@ int Server::Receive()
 	if (FindPlayer(port, clientInfo) == false) {
 		// The port does NOT exist in the map.
 		// Add the player to the map
-		double numPlayersConnected = g_ClientInfo.size();
+		USHORT numPlayersConnected = g_ClientInfo.size();
 
 		// Create new client info
 		clientInfo.clientAddr = g_RecvClientInfo.clientAddr;
@@ -166,23 +165,28 @@ int Server::Receive()
 		g_ClientInfo.push_back(clientInfo);
 		g_PlayerMessages.push_back(PlayerStateMessage());
 	}
-	if (playerState.ParseFromString(buf))
-	{
-		std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
-		/*g_RecvClientInfo.clientAddrSize = sizeof(g_RecvClientInfo.clientAddr);
-		g_RecvClientInfo.HaveInfo = true;*/
-		PlayerStateMessage playerStateMessage;
-		playerStateMessage.bulx = playerState.bulletposx();
-		playerStateMessage.bulz = playerState.bulletposz();
-		playerStateMessage.posx = playerState.posx();
-		playerStateMessage.posz = playerState.posz();
-		playerStateMessage.count = playerState.requestno();
-		playerStateMessage.id = playerState.playerid();
-		playerStateMessage.input_sum = playerState.input();
-		playerStateMessage.isshot = playerState.isshot();
-		g_PlayerMessages[clientInfo.playerID] = playerStateMessage;
-	}
 
+	PlayerStateMessage playerStateMessage; 
+	playerStateMessage = g_PlayerMessages[clientInfo.playerID];
+	memcpy(&playerStateMessage, (const void*)buf,sizeof(PlayerStateMessage));
+	std::cout << "Player position: " 
+		<< playerStateMessage.posx << ", " << playerStateMessage.posz << std::endl;
+	std::cout << "Input Sum: " << playerStateMessage.input_sum << std::endl;
+	std::string str = std::string(buf);
+	//if (playerState.ParseFromString(str))
+	//{
+	//	/*g_RecvClientInfo.clientAddrSize = sizeof(g_RecvClientInfo.clientAddr);
+	//	g_RecvClientInfo.HaveInfo = true;*/
+	//	playerStateMessage.bulx = playerState.bulletposx();
+	//	playerStateMessage.bulz = playerState.bulletposz();
+	//	playerStateMessage.posx = playerState.posx();
+	//	playerStateMessage.posz = playerState.posz();
+	//	playerStateMessage.count = playerState.requestno();
+	//	playerStateMessage.id = playerState.playerid();
+	//	playerStateMessage.input_sum = playerState.input();
+	//	playerStateMessage.isshot = playerState.isshot();	
+	//	std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
+	//}
 	return 1;
 }
 
@@ -318,7 +322,7 @@ void Server::UpdatePlayerState()
 
 void Server::UpdateClients(unsigned int messageId)
 {
-	proto_game::GameState game_state;
+	GameState game_state;
 	std::string state = "";
 	for (int i = 0; i < g_PlayerMessages.size(); i++)
 	{
@@ -340,9 +344,8 @@ void Server::UpdateClients(unsigned int messageId)
 			state += ".";
 		else state += "!";
 	}
-	game_state.set_state(state);
-	std::string buffer = "";
-	game_state.SerializeToString(&buffer);
+	game_state.game_state = state;
+
 
 	//printf("SEND: { %.2f, %.2f }\n", g_GameStateMessage.player.x, g_GameStateMessage.player.y);
 
@@ -350,8 +353,8 @@ void Server::UpdateClients(unsigned int messageId)
 		const ClientInfo& clientInfo = g_ClientInfo[i];
 		int sendResult = sendto(
 			g_ServerInfo.socket,
-			(const char*)buffer.c_str(),
-			sizeof(buffer),
+			(const char*)&game_state,
+			sizeof(game_state),
 			0,
 			(SOCKADDR*)&clientInfo.clientAddr,
 			clientInfo.clientAddrSize
@@ -370,7 +373,7 @@ void Server::UpdateClients(unsigned int messageId)
 			return;
 		}
 	}
-	//g_PlayerMessages.clear();
+	g_PlayerMessages.clear();
 }
 
 int Server::Bind()

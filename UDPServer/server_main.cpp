@@ -77,10 +77,7 @@ int main()
 
 	while (!gameOver) {
 		ProcessKeyboardInput();
-		if (server.Update())
-		{
-			std::cout << ".";
-		}
+		server.Update();
 	}
 	server.Shutdown();
 
