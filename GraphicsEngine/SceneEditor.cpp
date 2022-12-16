@@ -34,8 +34,6 @@ bool SceneEditor::InitSceneRender(GLFWwindow* window)
 
 void SceneEditor::ProcessInput(GLFWwindow* window)
 {
-	int sum = 0;
-	bool isshot = false;
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && gamePlay)
 	{
 		gamePlay = false;
@@ -47,7 +45,6 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 		|| glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
 		const glm::vec2 click(xpos, ypos);
-		isshot = true;
 		//ClickObject(click);
 		//mouseClicked = true;
 	}
@@ -55,44 +52,6 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 		mouseHoldDown = true;
 	else mouseHoldDown = false;
-
-	if (gamePlay)
-	{
-		float cameraSpeed;
-		glm::vec3 defFront = cameraFront;
-		defFront.y = 0.f;
-		
-		cameraSpeed = 2.5f * deltaTime;
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		{
-			sum += 1;
-		}
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		{
-			sum += 10;
-		}
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		{
-			sum += 100;
-		}
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		{
-			sum += 1000;
-		}
-
-		if (mainCamera->transform->position.x > XMAX)
-			mainCamera->transform->position.x = XMAX;
-
-		if (mainCamera->transform->position.x < XMIN)
-			mainCamera->transform->position.x = XMIN;
-
-		if (mainCamera->transform->position.z > ZMAX)
-			mainCamera->transform->position.z = ZMAX;
-
-		if (mainCamera->transform->position.z < ZMIN)
-			mainCamera->transform->position.z = ZMIN;
-		
-	}
 
 	if (mouseHoldDown && !gamePlay)
 	{
@@ -119,8 +78,6 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 			mainCamera->transform->position.y += cameraSpeed;
 		}
 	}
-	player->message.isshot = isshot;
-	player->message.input_sum = sum;
 }
 
 
@@ -232,15 +189,23 @@ void SceneEditor::DeleteGameObjects(std::vector<GameObject*> gameobjectList)
 
 void SceneEditor::GamePlayUpdate(GLFWwindow* window)
 {
-	player->message.messageID = glfwGetTime();
-	player->message.bulx = player->bullet->transform->position.x;
-	player->message.bulz = player->bullet->transform->position.z;
-	player->message.posx = player->player->transform->position.x;
-	player->message.posz = player->player->transform->position.z;
-	player->message.count = player->client->g_MessageSendCount++;
-	player->message.id = player->client->GetID();
-	player->client->SendUpdateToServer(player->message);
+	player->inputMessage->messageID = glfwGetTime();
+	/*player->message->bulx = player->bullet->transform->position.x;
+	player->message->bulz = player->bullet->transform->position.z;
+	player->message->posx = player->player->transform->position.x;
+	player->message->posz = player->player->transform->position.z;*/
+	player->inputMessage->count = player->client->g_MessageSendCount++;
+	player->inputMessage->id = player->client->GetID();
+	if (player->client->SendUpdateToServer(*player->inputMessage))
+	{
+		player->client->waitForInputToBeSentToServer = false;
+	}
 	player->Update(deltaTime);
+	if(player->client->CheckForUpdateFromGameServer())
+	{
+		player->client->px = player->client->g_ServerGameState.player1.posx;
+		player->client->pz = player->client->g_ServerGameState.player1.posz;
+	}
 }
 
 void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
@@ -260,7 +225,7 @@ void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 		deltaTime = currentFfame - lastFrame;
 		lastFrame = currentFfame;
 
-		ProcessInput(window);
+		if(!gamePlay)ProcessInput(window);
 
 		::g_pTheLightManager->CopyLightInformationToShader(shaderID);
 
@@ -483,10 +448,10 @@ void SceneEditor::RenderUI(GLFWwindow* window,GLuint shaderID)
 		
 		ImGui::GetForegroundDrawList()->AddCircle(window_center, window_size.y * 0.01f, IM_COL32(100, 255, 0, 150), 0, 10);
 
-		ImGui::End();
+		/*ImGui::End();
 		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		return;
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());*/
+		//return;
 	}
 	ImGui::BeginGroup();
 	ImGui::BeginChild("##scene", ImVec2(1920 * 0.15, 0));
@@ -1705,6 +1670,10 @@ bool SceneEditor::LoadSceneFile(cVAOManager* pVAOManager, GLuint shaderID)
 
 	player->player = GetGameObjectByName("Camera");
 	player->bullet = GetGameObjectByName("bullet");
+	player->client->px = player->player->transform->position.x;
+	player->client->pz = player->player->transform->position.z;
+	player->client->bz = player->bullet->transform->position.z;
+	player->client->bx = player->bullet->transform->position.x;
 	return true;
 }
 

@@ -65,6 +65,10 @@ void key_callback(GLFWwindow* window,
 	int key, int scancode,
 	int action, int mods)
 {
+	int sum = 0;
+	bool isshot = false;
+
+	theSceneEditor.player->inputMessage->input_sum = sum;
 	/*if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	{
 		std::cout << "Clicked!" << std::endl;
@@ -77,6 +81,57 @@ void key_callback(GLFWwindow* window,
 			theSceneEditor.EDITOR_CAMERA->transform->position =
 				theSceneEditor.selectedGameObject->transform->position + glm::vec3(-5.f, 2.f, -5.f);
 		}
+	}
+	if (theSceneEditor.gamePlay)
+	{
+		float cameraSpeed;
+		glm::vec3 defFront = theSceneEditor.cameraFront;
+		defFront.y = 0.f;
+
+		cameraSpeed = 2.5f * theSceneEditor.deltaTime;
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{
+			sum += 1;
+			/*if (!theSceneEditor.w_pressed)
+			{
+				theSceneEditor.w_pressed = true;
+			}*/
+		}
+		//else theSceneEditor.w_pressed = false;
+
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			sum += 10;
+			/*if (!theSceneEditor.s_pressed)
+			{
+				theSceneEditor.s_pressed = true;
+			}*/
+		}
+		//else theSceneEditor.s_pressed = false;
+
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			sum += 100;
+			/*if (!theSceneEditor.a_pressed)
+			{
+				theSceneEditor.a_pressed = true;
+			}*/
+		}
+		//else theSceneEditor.a_pressed = false;
+
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			sum += 1000;
+			/*if (!theSceneEditor.d_pressed)
+			{
+				theSceneEditor.d_pressed = true;
+			}*/
+		}
+		//else theSceneEditor.d_pressed = false;
+
+		theSceneEditor.player->inputMessage->isshot = isshot;
+		theSceneEditor.player->inputMessage->input_sum = sum;
+		return;
 	}
 	return;
 }

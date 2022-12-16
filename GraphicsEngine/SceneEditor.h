@@ -95,5 +95,9 @@ public:
 
 	// Physics Game Stuff
 	Player* player = new Player();
+	bool w_pressed = false;
+	bool s_pressed = false;
+	bool a_pressed = false;
+	bool d_pressed = false;
 };
 

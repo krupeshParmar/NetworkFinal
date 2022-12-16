@@ -6,6 +6,7 @@
 #include <string>
 #include "proto_game.pb.h"
 #include "../UDPServer/Common.h"
+#include "inc_opengl.h"
 
 
 enum ClientState {
@@ -24,7 +25,7 @@ public:
 	void Destroy();
 
 	void SetServerAddressAndPort(std::string address, int port);
-	bool SendUpdateToServer(PlayerStateMessage& data);
+	bool SendUpdateToServer(InputMessage& data);
 	bool CheckForUpdateFromGameServer();
 
 	void Update(float deltaTime);
@@ -33,14 +34,17 @@ public:
 	float ID;
 	float px, pz, bx, bz;
 
+	bool waitForInputToBeSentToServer = false;
+	GameState g_ServerGameState;
 private:
+	int sendCount = 0;
 	SOCKET m_ServerSocket;
 	sockaddr_in m_AddrInfo;
 	int m_AddressSize;
 	ClientState m_ClientState;
 	float m_NextSendTime;
 	float m_NextRecvTime;
-	float m_SendTimeDelta;
+	double m_SendTimeDelta;
 	float m_RecvTimeDelta;
 	float m_CurrentTime;
 };

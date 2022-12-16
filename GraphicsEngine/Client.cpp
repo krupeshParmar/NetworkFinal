@@ -25,6 +25,7 @@ Client::~Client()
 
 void Client::Initialize()
 {
+	m_SendTimeDelta = glfwGetTime();
 	if (m_ClientState == Initialized)
 		return;
 	// Initialization 
@@ -81,16 +82,26 @@ void Client::SetServerAddressAndPort(std::string address, int port)
 	m_AddressSize = sizeof(m_AddrInfo);
 }
 
-bool Client::SendUpdateToServer(PlayerStateMessage& data)
+bool Client::SendUpdateToServer(InputMessage& data)
 {
 	if (m_ClientState != Initialized)
 		return false;
+
+	if (glfwGetTime() - m_SendTimeDelta > 1)
+	{
+		sendCount = 0;
+		m_SendTimeDelta = glfwGetTime();
+	}
+	else {
+		if (sendCount > 5)
+			return true;
+	}
 
 	/*if (m_CurrentTime < m_NextSendTime)
 		return false;
 	m_NextSendTime += m_SendTimeDelta;*/
 
-	proto_game::PlayerState playerState;
+	/*proto_game::PlayerState playerState;
 	
 	playerState.set_playerid(data.id);
 	playerState.set_requestno(data.count);
@@ -101,15 +112,17 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 	playerState.set_isshot(data.isshot);
 	playerState.set_input(data.input_sum);
 	std::string buffer = "";
-	buffer = playerState.SerializeAsString();
-	std::cout << "PosX, Posz" << playerState.posx() << ", " << playerState.posz() << std::endl;
+	buffer = playerState.SerializeAsString();*/
+	//std::cout << "PosX, Posz" << data.posx << ", " << data.posz << std::endl;
+	/*data.posx = ceil(data.posx * 10.f) / 10.f;
+	data.posz = ceil(data.posz * 10.f) / 10.f;*/
 
 	int sendResult = sendto(
 		m_ServerSocket,			// the SOCKET we created for our server
 		(const char*)&data,		// The data we are sending
 								// This is a POINTER to a UserInputMessage type
 								// casted to a const char pointer.
-		sizeof(data),			// The length of the message we are sending in bytes
+		sizeof(InputMessage),			// The length of the message we are sending in bytes
 		0,						// We are not setting any flags
 		(SOCKADDR*)&m_AddrInfo, // The address of our server set in SetServerAddressAndPort
 		m_AddressSize			// The length of our AddrInfo
@@ -130,6 +143,7 @@ bool Client::SendUpdateToServer(PlayerStateMessage& data)
 		return false;
 	}
 	else if (sendResult > 0) {
+		sendCount++;
 		return true;
 	}
 	return false;
@@ -173,15 +187,17 @@ bool Client::CheckForUpdateFromGameServer()
 
 		return false;
 	}
-	std::string buffer = std::string(buf);
-	GameState gameState;
-	memcpy(&gameState, (const void*)buf, buffer.size());
+
 	/*proto_game::GameState game;
 	game.ParseFromString(buf);*/
-	std::string game_state = gameState.game_state;
+	/*std::string game_state = std::string(buf);
 	int count = 0;
-
-	std::string ch = "";
+	std::cout << "GameState: " << game_state << std::endl;
+	std::string ch = "s";*/
+	memcpy(&g_ServerGameState, (const void*)buf, sizeof(GameState));
+	std::cout << "Player1 px: " << g_ServerGameState.player1.posx << ", px: " << g_ServerGameState.player1.posz << std::endl;
+	return true;
+	/*
 	while (ch != "!" && ch != "")
 	{
 		if (ch == ".")
@@ -216,19 +232,23 @@ bool Client::CheckForUpdateFromGameServer()
 		count++;
 		float bulx = std::stof(ch);
 		ch = "";
-		while (game_state[count] != '!' || game_state[count] != '.')
+		while (game_state[count] != 'A' || game_state[count] != '.')
 		{
 			ch += game_state[count++];
 		}
 		float bulz = std::stof(ch);
+		this->px = posx;
+		this->pz = posz;
+		this->bx = bulx;
+		this->bz = bulz;
+		std::cout << "PX" << this->px << std::endl;
+		std::cout << "PZ" << this->pz << std::endl;
 		if (id == this->ID)
 		{
-			this->px = posx;
-			this->pz = posz;
-			this->bx = bulx;
-			this->bz = bulz;
+			
 		}
 	}
+	*/
 
 	return true;
 }

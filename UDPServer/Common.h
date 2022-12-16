@@ -24,12 +24,21 @@ struct PlayerStateMessage : public Message {
 	int count;
 	float posx, posz;
 	float bulx, bulz;
+	//int input_sum;
+	//bool isshot;
+};
+struct InputMessage : public Message {
+	double id;
+	int count;
 	int input_sum;
 	bool isshot;
 };
 
 struct GameState : public Message
 {
-	std::string game_state;
+	PlayerStateMessage player1;
+	PlayerStateMessage player2;
+	PlayerStateMessage player3;
+	PlayerStateMessage player4;
 };
 

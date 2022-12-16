@@ -20,13 +20,17 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_PORT 5555
+const float changeValue = 2.f;
 
 Server::Server() {
-
+	gameState.player1.posx = 0.f;
+	gameState.player1.posz = 0.f;
+	gameState.player2.posx = 10.f;
+	gameState.player2.posz = 10.f;
 }
 
 Server::~Server() {
-
+	gameState = GameState();
 }
 
 int Server::Initialize() {
@@ -163,15 +167,18 @@ int Server::Receive()
 
 		// Store the client info
 		g_ClientInfo.push_back(clientInfo);
-		g_PlayerMessages.push_back(PlayerStateMessage());
+		g_PlayerMessages.push_back(new InputMessage());
 	}
 
-	PlayerStateMessage playerStateMessage; 
-	playerStateMessage = g_PlayerMessages[clientInfo.playerID];
-	memcpy(&playerStateMessage, (const void*)buf,sizeof(PlayerStateMessage));
-	std::cout << "Player position: " 
-		<< playerStateMessage.posx << ", " << playerStateMessage.posz << std::endl;
-	std::cout << "Input Sum: " << playerStateMessage.input_sum << std::endl;
+	InputMessage* inputMessage = g_PlayerMessages[clientInfo.playerID];
+	memcpy(inputMessage, (const void*)buf,sizeof(InputMessage));
+
+	if (inputMessage->input_sum > 0)
+	{
+		std::cout << "Input Sum: " << inputMessage->input_sum << std::endl;
+		PlayerStateMessage playerStateMessage = GetPlayerInfoReferenceById(clientInfo.playerID);
+		std::cout << "Game State: X: " << playerStateMessage.posx << ", Z: " << playerStateMessage.posz << std::endl;
+	}
 	std::string str = std::string(buf);
 	//if (playerState.ParseFromString(str))
 	//{
@@ -214,12 +221,13 @@ void Server::Shutdown() {
 void Server::UpdatePlayerState()
 {
 	for (int i = 0; i < g_PlayerMessages.size(); i++) {
-		PlayerStateMessage& playerMessage = g_PlayerMessages[i];
+		InputMessage* playerMessage = g_PlayerMessages[i];
+		PlayerStateMessage& playerStateMessage = GetPlayerInfoReferenceById(i);
 		bool press_w = false, press_s = false, press_a = false, press_d = false;
-		if (playerMessage.input_sum >= 1000)
+		if (playerMessage->input_sum >= 1000)
 		{
 			press_d = true;
-			int sum = playerMessage.input_sum - 1000;
+			int sum = playerMessage->input_sum - 1000;
 			if (sum > 0)
 			{
 				switch (sum)
@@ -247,18 +255,18 @@ void Server::UpdatePlayerState()
 				case 111:
 					press_a = true;
 					press_w = true;
-					press_d = true;
+					press_s = true;
 					break;
 
 				}
 			}
 		}
-		else if (playerMessage.input_sum >= 100)
+		else if (playerMessage->input_sum >= 100)
 		{
 			press_a = true;
-			if (playerMessage.input_sum - 100 > 0)
+			int sum = playerMessage->input_sum - 100;
+			if (sum > 0)
 			{
-				int sum = playerMessage.input_sum - 100;
 				if (sum > 100)
 				{
 					switch (sum)
@@ -280,81 +288,94 @@ void Server::UpdatePlayerState()
 					}
 				}
 			}
-			else if (playerMessage.input_sum >= 10)
-			{
-				press_s = true;
-				int sum = playerMessage.input_sum - 10;
-				if (sum > 10)
-				{
-					switch (sum)
-					{
-					case 1:
-						press_w = true;
-						break;
-					}
-				}
-			}
-			else
+		}
+		else if (playerMessage->input_sum > 10)
+		{
+			press_s = true;
+			int sum = playerMessage->input_sum - 10;
+			if (sum > 1)
 			{
 				press_w = true;
 			}
-
-
+		}
+		else if(playerMessage->input_sum == 1)
+		{
+			press_w = true;
 		}
 		if (press_w)
 		{
-			playerMessage.posz += 10.f;
+			playerStateMessage.posz += changeValue;
 		}
 		if (press_s)
 		{
-			playerMessage.posz -= 10.f;
+			playerStateMessage.posz -= changeValue;
 		}
 		if (press_a)
 		{
-			playerMessage.posx -= 10.f;
+			playerStateMessage.posx -= changeValue;
 		}
 		if (press_d)
 		{
-			playerMessage.posx += 10.f;
+			playerStateMessage.posx += changeValue;
 		}
+		playerMessage->input_sum = 0;
+		if (playerStateMessage.posx > XMAX)
+			playerStateMessage.posx = XMAX;
+
+		if (playerStateMessage.posx < XMIN)
+			playerStateMessage.posx = XMIN;
+
+		if (playerStateMessage.posz > ZMAX)
+			playerStateMessage.posz = ZMAX;
+
+		if (playerStateMessage.posz < ZMIN)
+			playerStateMessage.posz = ZMIN;
 	}
 }
 
 void Server::UpdateClients(unsigned int messageId)
 {
-	GameState game_state;
-	std::string state = "";
-	for (int i = 0; i < g_PlayerMessages.size(); i++)
-	{
-		PlayerStateMessage playerStateMessage = g_PlayerMessages[i];
-		state += std::to_string(g_PlayerMessages.size());
-		state += ",";
-		state += std::to_string(playerStateMessage.id);
-		state += ",";
-		state += std::to_string(playerStateMessage.count);
-		state += ",";
-		state += std::to_string(playerStateMessage.posx);
-		state += ",";
-		state += std::to_string(playerStateMessage.posz);
-		state += ",";
-		state += std::to_string(playerStateMessage.bulx);
-		state += ",";
-		state += std::to_string(playerStateMessage.bulz);
-		if (i != g_PlayerMessages.size() - 1)
-			state += ".";
-		else state += "!";
-	}
-	game_state.game_state = state;
-
-
-	//printf("SEND: { %.2f, %.2f }\n", g_GameStateMessage.player.x, g_GameStateMessage.player.y);
+	//std::string state = "";
+	//for (int i = 0; i < g_PlayerMessages.size(); i++)
+	//{
+	//	/*g_PlayerMessages[i]->posx = ceil(g_PlayerMessages[i]->posx * 10.f) / 10.f;
+	//	g_PlayerMessages[i]->posz = ceil(g_PlayerMessages[i]->posz * 10.f) / 10.f;*/
+	//	//std::cout << "===========================================" << std::endl;
+	//	if(i == 0)
+	//		gameState.player1 = *g_PlayerMessages[i];
+	//	if(i == 1)
+	//		gameState.player2 = *g_PlayerMessages[i];
+	//	if(i == 2)
+	//		gameState.player3 = *g_PlayerMessages[i];
+	//	if(i == 3)
+	//		gameState.player4 = *g_PlayerMessages[i];
+	//	std::cout << "GameState: " 
+	//		<< gameState.player1.posx << ", " << gameState.player1.posz << std::endl;
+	//	g_PlayerMessages[i]->input_sum = 0;
+	//	/*state += std::to_string(g_PlayerMessages.size());
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.id);
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.count);
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.posx);
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.posz);
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.bulx);
+	//	state += ",";
+	//	state += std::to_string(playerStateMessage.bulz);
+	//	if (i != g_PlayerMessages.size() - 1)
+	//		state += ".";
+	//	else state += "A";*/
+	//}
 
 	for (int i = 0; i < g_ClientInfo.size(); i++) {
 		const ClientInfo& clientInfo = g_ClientInfo[i];
 		int sendResult = sendto(
 			g_ServerInfo.socket,
-			(const char*)&game_state,
-			sizeof(game_state),
+			(const char*)&gameState,
+			sizeof(GameState),
 			0,
 			(SOCKADDR*)&clientInfo.clientAddr,
 			clientInfo.clientAddrSize
@@ -369,11 +390,10 @@ void Server::UpdateClients(unsigned int messageId)
 				WSACleanup();
 				//g_doQuit = true;
 			}
-
 			return;
 		}
 	}
-	g_PlayerMessages.clear();
+	//g_PlayerMessages.clear();
 }
 
 int Server::Bind()
@@ -449,6 +469,16 @@ bool Server::FindPlayer(int port, ClientInfo& clientInfo)
 	}
 
 	return false;
+}
+
+PlayerStateMessage& Server::GetPlayerInfoReferenceById(USHORT id)
+{
+	if (id == 0) return gameState.player1;
+	if (id == 1) return gameState.player2;
+	if (id == 2) return gameState.player3;
+	if (id == 3) return gameState.player4;
+
+	return gameState.player1;
 }
 
 //PlayerInfo& Server::GetPlayerInfoReferenceById(USHORT id)

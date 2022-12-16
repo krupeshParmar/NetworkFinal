@@ -6,9 +6,9 @@
 		<components>
 			<transform>
 				<position>
-					<x>7.101185</x>
-					<y>68.876709</y>
-					<z>-15.433708</z>
+					<x>8.463170</x>
+					<y>28.785942</y>
+					<z>-37.041691</z>
 				</position>
 				<rotation>
 					<x>0.000000</x>
@@ -187,7 +187,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>892534784</type>
+				<type>121</type>
 				<range>-431602080.000000</range>
 				<intensity>-431602080.000000</intensity>
 				<mode>-842150451</mode>
@@ -1342,7 +1342,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>0</type>
+				<type>1035025110</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1414,7 +1414,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1162608640</type>
+				<type>1030046974</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1486,7 +1486,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>0</type>
+				<type>1051501242</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1558,7 +1558,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>0</type>
+				<type>1051568317</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1630,7 +1630,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>3407926</type>
+				<type>1049923143</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1702,7 +1702,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>741354544</type>
+				<type>1045508051</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1774,7 +1774,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1297239878</type>
+				<type>1064070078</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1846,7 +1846,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>808203570</type>
+				<type>1051523858</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1918,7 +1918,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>0</type>
+				<type>1049888213</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1990,7 +1990,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>369779328</type>
+				<type>1056346837</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -2062,7 +2062,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>8</type>
+				<type>1048648746</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
