@@ -9,6 +9,9 @@ Player::Player()
 	client = new Client();
 	client->Initialize();
 	client->SetServerAddressAndPort("127.0.0.1", 5555);
+	/*InputMessage input = InputMessage();
+	input.id = client->GetID();
+	client->SendUpdateToServer(input);*/
 	message = new PlayerStateMessage();
 	inputMessage = new InputMessage();
 	client->px = 0.f;
@@ -31,19 +34,30 @@ void Player::Update(float dt)
 		return;*/
 	this->client->waitForInputToBeSentToServer = true;
 	
+	if (this->client->dead)
+	{
+		this->player->transform->position
+			= glm::vec3(
+				this->client->px, 
+				this->player->transform->position.y, 
+				this->client->pz
+			);
+		this->client->dead = false;
+	}
+
 	glm::vec3 clientPos = glm::vec3(
-		client->px,
-		2.f, 
-		client->pz);
+		this->client->px,
+		this->player->transform->position.y, 
+		this->client->pz);
 	glm::vec3 difference = clientPos - this->player->transform->position;
-	if (difference.x < 0.5f && difference.z < 0.5f)
+	/*if (difference.x < 0.5f && difference.z < 0.5f)
 	{
 		this->client->px = this->player->transform->position.x;
 		this->client->pz = this->player->transform->position.z;
 		return;
-	}
+	}*/
 	//this->player->transform->position = glm::vec3(client->px, 2.f, client->pz);
-	this->player->transform->position += difference / 50.f;
+	this->player->transform->position += difference / 54.f;
 	/*if (this->player->transform->position.x > XMAX)
 		this->player->transform->position.x = XMAX;
 

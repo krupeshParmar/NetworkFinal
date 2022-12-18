@@ -40,13 +40,13 @@ void GetClientsInfo() {
 }
 
 void Update() {
-	if (TimeDifference() > 1) {
+	/*if (TimeDifference() > 1) {
 		return;
 	}
 
 	if (TimeDifference() < 100) {
 		currentTime += TimeDifference();
-	}
+	}*/
 
 	GetClientsInfo();
 

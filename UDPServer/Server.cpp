@@ -20,13 +20,17 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 #define DEFAULT_PORT 5555
-const float changeValue = 2.f;
+const float changeValue = 1.f;
 
 Server::Server() {
 	gameState.player1.posx = 0.f;
 	gameState.player1.posz = 0.f;
 	gameState.player2.posx = 10.f;
 	gameState.player2.posz = 10.f;
+	gameState.player3.posx = -10.f;
+	gameState.player3.posz = 10.f;
+	gameState.player4.posx = -20.f;
+	gameState.player4.posz = 20.f;
 }
 
 Server::~Server() {
@@ -46,12 +50,27 @@ int Server::Initialize() {
 
 	g_RecvClientInfo.clientAddrSize = sizeof(g_RecvClientInfo.clientAddr);
 	g_RecvClientInfo.HaveInfo = false;
+	//m_SendTimeDelta = std::chrono::steady_clock::now();
 }
 
 bool Server::Update() {
+	g_LastUpdateTime = g_CurrentUpdateTime;
+	g_CurrentUpdateTime = std::chrono::steady_clock::now();
+	std::chrono::duration<double> elapsed = g_CurrentUpdateTime - g_LastUpdateTime;
+	deltaTimeInSeconds = elapsed.count();
+	if (deltaTimeInSeconds > 1) {
+		std::cout << "1 ok?" << std::endl;
+		return true;
+	}
 
+	if (deltaTimeInSeconds < 100)
+		g_CurrentTime += deltaTimeInSeconds;
 	/*const int bufsize = sizeof(UserInputMessage);
 	char buf[bufsize];*/
+	for (int i = 0; i < g_PlayerMessages.size(); i++) {
+		PlayerStateMessage& playerStateMessage = GetPlayerInfoReferenceById(i);
+		playerStateMessage.died = false;
+	}
 	this->GetInforFromClients();
 	this->UpdatePlayerState();
 	this->UpdateClients(1);
@@ -172,10 +191,27 @@ int Server::Receive()
 
 	InputMessage* inputMessage = g_PlayerMessages[clientInfo.playerID];
 	memcpy(inputMessage, (const void*)buf,sizeof(InputMessage));
+	if (inputMessage->id == -1)
+	{
+		GameState newGameStateJustForPlayer;
+		newGameStateJustForPlayer.messageID = 1;
+		newGameStateJustForPlayer.player1.id = clientInfo.playerID;
+		int sendResult = sendto(
+			g_ServerInfo.socket,
+			(const char*)&newGameStateJustForPlayer,
+			sizeof(GameState),
+			0,
+			(SOCKADDR*)&clientInfo.clientAddr,
+			clientInfo.clientAddrSize
+		);
+		std::cout << "Send player their ID" << std::endl;
+		return 1;
+	}
 
 	if (inputMessage->input_sum > 0)
 	{
-		std::cout << "Input Sum: " << inputMessage->input_sum << std::endl;
+		std::cout << "Input Sum from " << inputMessage->id << 
+			": " << inputMessage->input_sum << std::endl;
 		PlayerStateMessage playerStateMessage = GetPlayerInfoReferenceById(clientInfo.playerID);
 		std::cout << "Game State: X: " << playerStateMessage.posx << ", Z: " << playerStateMessage.posz << std::endl;
 	}
@@ -218,12 +254,28 @@ void Server::Shutdown() {
 	WSACleanup();
 }
 
+
+float FloatRandom(bool isX)
+{
+	srand(time(0));
+	if (isX)
+		return rand() % XMAX + XMIN;
+	else return rand() % ZMAX + ZMIN;
+}
+
 void Server::UpdatePlayerState()
 {
 	for (int i = 0; i < g_PlayerMessages.size(); i++) {
 		InputMessage* playerMessage = g_PlayerMessages[i];
 		PlayerStateMessage& playerStateMessage = GetPlayerInfoReferenceById(i);
 		bool press_w = false, press_s = false, press_a = false, press_d = false;
+		if (playerMessage->isshot != -1)
+		{
+			PlayerStateMessage& deadPlayer = GetPlayerInfoReferenceById((USHORT)playerMessage->isshot);
+			deadPlayer.died = true;
+			deadPlayer.posx = FloatRandom(true);
+			deadPlayer.posz = FloatRandom(false);
+		}
 		if (playerMessage->input_sum >= 1000)
 		{
 			press_d = true;
@@ -289,7 +341,7 @@ void Server::UpdatePlayerState()
 				}
 			}
 		}
-		else if (playerMessage->input_sum > 10)
+		else if (playerMessage->input_sum >= 10)
 		{
 			press_s = true;
 			int sum = playerMessage->input_sum - 10;
@@ -312,11 +364,11 @@ void Server::UpdatePlayerState()
 		}
 		if (press_a)
 		{
-			playerStateMessage.posx -= changeValue;
+			playerStateMessage.posx += changeValue;
 		}
 		if (press_d)
 		{
-			playerStateMessage.posx += changeValue;
+			playerStateMessage.posx -= changeValue;
 		}
 		playerMessage->input_sum = 0;
 		if (playerStateMessage.posx > XMAX)
@@ -335,6 +387,11 @@ void Server::UpdatePlayerState()
 
 void Server::UpdateClients(unsigned int messageId)
 {
+	if (g_CurrentTime < g_NextNetworkSend)
+	{
+		return;
+	}
+	g_NextNetworkSend = g_CurrentTime + g_SendDeltaTime;
 	//std::string state = "";
 	//for (int i = 0; i < g_PlayerMessages.size(); i++)
 	//{
@@ -369,8 +426,38 @@ void Server::UpdateClients(unsigned int messageId)
 	//		state += ".";
 	//	else state += "A";*/
 	//}
+	/*auto start = std::chrono::steady_clock::now();
+	auto end = std::chrono::steady_clock::now();
+	std::chrono::duration<double> elapsed_seconds = end - start;
+	std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";*/
+
+	/*if ( - m_SendTimeDelta > 1)
+	{
+		sendCount = 0;
+		m_SendTimeDelta = std::chrono::system_clock::now();;
+	}
+	else {
+		if (sendCount > 5)
+			return;
+	}*/
+
+	/*gameState.player1.id = -1;
+	gameState.player2.id = -1;
+	gameState.player3.id = -1;
+	gameState.player4.id = -1;*/
 
 	for (int i = 0; i < g_ClientInfo.size(); i++) {
+		if (i == 0)
+			gameState.player1.id = g_ClientInfo[i].playerID;
+		if (i == 1)
+			gameState.player2.id = g_ClientInfo[i].playerID;
+		if (i == 2)
+			gameState.player3.id = g_ClientInfo[i].playerID;
+		if (i == 3)
+			gameState.player4.id = g_ClientInfo[i].playerID;
+	}
+	for (int i = 0; i < g_ClientInfo.size(); i++) {
+
 		const ClientInfo& clientInfo = g_ClientInfo[i];
 		int sendResult = sendto(
 			g_ServerInfo.socket,

@@ -29,14 +29,15 @@ public:
 	bool CheckForUpdateFromGameServer();
 
 	void Update(float deltaTime);
-	float GetID() { return this->ID; }
+	int GetID() { return this->ID; }
 	unsigned int g_MessageSendCount = 0;
-	float ID;
 	float px, pz, bx, bz;
+	bool dead = false;
 
 	bool waitForInputToBeSentToServer = false;
 	GameState g_ServerGameState;
 private:
+	int ID = -1;
 	int sendCount = 0;
 	SOCKET m_ServerSocket;
 	sockaddr_in m_AddrInfo;

@@ -6,9 +6,9 @@
 		<components>
 			<transform>
 				<position>
-					<x>8.463170</x>
-					<y>28.785942</y>
-					<z>-37.041691</z>
+					<x>8.322448</x>
+					<y>5.629900</y>
+					<z>-3.191924</z>
 				</position>
 				<rotation>
 					<x>0.000000</x>
@@ -209,7 +209,7 @@
 	</gameobject>
 	<gameobject>
 		<name>enemy</name>
-		<enabled>1</enabled>
+		<enabled>0</enabled>
 		<components>
 			<transform>
 				<position>
@@ -265,7 +265,7 @@
 	</gameobject>
 	<gameobject>
 		<name>enemy</name>
-		<enabled>1</enabled>
+		<enabled>0</enabled>
 		<components>
 			<transform>
 				<position>
@@ -321,7 +321,7 @@
 	</gameobject>
 	<gameobject>
 		<name>enemy</name>
-		<enabled>1</enabled>
+		<enabled>0</enabled>
 		<components>
 			<transform>
 				<position>
@@ -377,7 +377,7 @@
 	</gameobject>
 	<gameobject>
 		<name>enemy</name>
-		<enabled>1</enabled>
+		<enabled>0</enabled>
 		<components>
 			<transform>
 				<position>
@@ -564,7 +564,7 @@
 	</gameobject>
 	<gameobject>
 		<name>enemy</name>
-		<enabled>1</enabled>
+		<enabled>0</enabled>
 		<components>
 			<transform>
 				<position>
@@ -1342,7 +1342,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1035025110</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1414,7 +1414,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1030046974</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1486,7 +1486,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1051501242</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1558,7 +1558,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1051568317</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1630,7 +1630,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1049923143</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1702,7 +1702,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1045508051</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1774,7 +1774,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1064070078</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1846,7 +1846,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1051523858</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1918,7 +1918,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1049888213</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -1990,7 +1990,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1056346837</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -2062,7 +2062,7 @@
 					<z>0.000000</z>
 					<w>1.000000</w>
 				</param2>
-				<type>1048648746</type>
+				<type>1132396544</type>
 				<range>0.000000</range>
 				<intensity>903074688.000000</intensity>
 				<mode>1314201644</mode>
@@ -2080,6 +2080,174 @@
 				<a>1.000000</a>
 			</rgba>
 			<wireframe>1</wireframe>
+		</meshobject>
+	</gameobject>
+	<gameobject>
+		<name>player2</name>
+		<enabled>0</enabled>
+		<components>
+			<transform>
+				<position>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</position>
+				<rotation>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</rotation>
+				<scale>
+					<x>1.000000</x>
+					<y>1.000000</y>
+					<z>1.000000</z>
+				</scale>
+			</transform>
+			<rigidbody>
+				<mass>1.000000</mass>
+				<acceleration>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</acceleration>
+			</rigidbody>
+			<boxcollider>
+				<minposition>
+					<x>-0.599425</x>
+					<y>-0.002223</y>
+					<z>-0.161642</z>
+				</minposition>
+				<maxposition>
+					<x>0.589828</x>
+					<y>1.942740</y>
+					<z>0.331519</z>
+				</maxposition>
+			</boxcollider>
+		</components>
+		<meshobject>
+			<name>femaleninja2</name>
+			<path></path>
+			<nuselight>0</nuselight>
+			<usergba>1</usergba>
+			<rgba>
+				<r>1.000000</r>
+				<g>0.000000</g>
+				<b>0.000000</b>
+				<a>1.000000</a>
+			</rgba>
+			<wireframe>0</wireframe>
+		</meshobject>
+	</gameobject>
+	<gameobject>
+		<name>player3</name>
+		<enabled>0</enabled>
+		<components>
+			<transform>
+				<position>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>2.000000</z>
+				</position>
+				<rotation>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</rotation>
+				<scale>
+					<x>1.000000</x>
+					<y>1.000000</y>
+					<z>1.000000</z>
+				</scale>
+			</transform>
+			<rigidbody>
+				<mass>1.000000</mass>
+				<acceleration>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</acceleration>
+			</rigidbody>
+			<boxcollider>
+				<minposition>
+					<x>-0.599425</x>
+					<y>-0.002223</y>
+					<z>-0.161642</z>
+				</minposition>
+				<maxposition>
+					<x>0.589828</x>
+					<y>1.942740</y>
+					<z>0.331519</z>
+				</maxposition>
+			</boxcollider>
+		</components>
+		<meshobject>
+			<name>femaleninja2</name>
+			<path></path>
+			<nuselight>0</nuselight>
+			<usergba>1</usergba>
+			<rgba>
+				<r>1.000000</r>
+				<g>0.000000</g>
+				<b>0.000000</b>
+				<a>1.000000</a>
+			</rgba>
+			<wireframe>0</wireframe>
+		</meshobject>
+	</gameobject>
+	<gameobject>
+		<name>player4</name>
+		<enabled>0</enabled>
+		<components>
+			<transform>
+				<position>
+					<x>-2.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</position>
+				<rotation>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</rotation>
+				<scale>
+					<x>1.000000</x>
+					<y>1.000000</y>
+					<z>1.000000</z>
+				</scale>
+			</transform>
+			<rigidbody>
+				<mass>1.000000</mass>
+				<acceleration>
+					<x>0.000000</x>
+					<y>0.000000</y>
+					<z>0.000000</z>
+				</acceleration>
+			</rigidbody>
+			<boxcollider>
+				<minposition>
+					<x>-0.599425</x>
+					<y>-0.002223</y>
+					<z>-0.161642</z>
+				</minposition>
+				<maxposition>
+					<x>0.589828</x>
+					<y>1.942740</y>
+					<z>0.331519</z>
+				</maxposition>
+			</boxcollider>
+		</components>
+		<meshobject>
+			<name>femaleninja2</name>
+			<path></path>
+			<nuselight>0</nuselight>
+			<usergba>1</usergba>
+			<rgba>
+				<r>1.000000</r>
+				<g>0.000000</g>
+				<b>0.000000</b>
+				<a>1.000000</a>
+			</rgba>
+			<wireframe>0</wireframe>
 		</meshobject>
 	</gameobject>
 </scene>

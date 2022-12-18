@@ -18,6 +18,8 @@
 #include <imgui/misc/imgui_stdlib.h>
 #include "System/Components/BoxCollider.h"
 #include "Player.h"
+#include "EnemyPlayer.h"
+#include "physics/PhysicsSystem.h"
 #define XMIN -37
 #define XMAX 37
 #define ZMIN -2
@@ -94,7 +96,9 @@ public:
 	void ProcessMouseMovement(float xoffset, float yoffset);
 
 	// Physics Game Stuff
+	PhysicsSystem physicsSystem;
 	Player* player = new Player();
+	std::vector<EnemyPlayer*> list_Enemies;
 	bool w_pressed = false;
 	bool s_pressed = false;
 	bool a_pressed = false;

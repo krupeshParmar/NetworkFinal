@@ -151,6 +151,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="EnemyPlayer.cpp" />
+    <ClCompile Include="Physics\PhysicsDebugRenderer.cpp" />
+    <ClCompile Include="Physics\PhysicsMath.cpp" />
+    <ClCompile Include="Physics\PhysicsObject.cpp" />
+    <ClCompile Include="Physics\PhysicsSystem.cpp" />
+    <ClCompile Include="Physics\PhysicsUtils.cpp" />
+    <ClCompile Include="Physics\Shapes.cpp" />
+    <ClCompile Include="Physics\Spring.cpp" />
+    <ClCompile Include="Physics\Time.cpp" />
+    <ClCompile Include="Physics\Vector3.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="proto_game.pb.cc" />
     <ClCompile Include="System\Components\RigidBody.cpp" />
@@ -181,6 +191,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h" />
+    <ClInclude Include="EnemyPlayer.h" />
+    <ClInclude Include="Physics\Ball.h" />
+    <ClInclude Include="Physics\PhysicsDebugRenderer.h" />
+    <ClInclude Include="Physics\PhysicsMath.h" />
+    <ClInclude Include="Physics\PhysicsObject.h" />
+    <ClInclude Include="Physics\PhysicsSystem.h" />
+    <ClInclude Include="Physics\PhysicsUtils.h" />
+    <ClInclude Include="Physics\Shapes.h" />
+    <ClInclude Include="Physics\Spring.h" />
+    <ClInclude Include="Physics\Time.h" />
+    <ClInclude Include="Physics\Vector3.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="proto_game.pb.h" />
     <ClInclude Include="System\Components\RigidBody.h" />

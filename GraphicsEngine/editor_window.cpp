@@ -1,14 +1,27 @@
 /**
+* 
+*	This is a group project
+*	Group members details are listed below
+* 
 *	Student name:	Krupesh Ashok Parmar
 *	Student number:	1124374
+*	
+*	Student name:	Rameez Mohammed Ibrahim Khatri
+*	Student number:	1121268
+* 
+*	Student name:	Ademola Festus Adedeji
+*	Student number:	1138817
+* 
 *	Student mail:	k_parmar180076@fanshaweonline.ca
 *	Program name:	GAME DEVELOPMENT ADVANCED PROGRAMMING
-*	Course name:	
+*	Course name:	Network Programming
+* 
+*	Final Project - Multiplayer shooting game
 *	
 *	a) How to build this project:
 *		- Select x64 platform
 *		- Select Release configuration for best performance
-*		- Right click on "GraphicsEngine" from Solution Explorer and hit build
+*		- Right click on "ProjectName" from Solution Explorer and hit build
 *		- The build is now created for selected platform
 *	
 *	b) How to run this project:
@@ -18,7 +31,9 @@
 *		- Hold right click to interact with camera
 *		- While right click is held down use WASD keys to move camera
 *		- Hold down shift key to move faster
-*		- The Game Play inputs are mentioned in the editor window
+*		- Select Gameplay to start playing the game
+*		- Use left click to shoot
+* 
 */
 
 #include "inc_opengl.h"
@@ -66,7 +81,6 @@ void key_callback(GLFWwindow* window,
 	int action, int mods)
 {
 	int sum = 0;
-	bool isshot = false;
 
 	theSceneEditor.player->inputMessage->input_sum = sum;
 	/*if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
@@ -128,8 +142,7 @@ void key_callback(GLFWwindow* window,
 			}*/
 		}
 		//else theSceneEditor.d_pressed = false;
-
-		theSceneEditor.player->inputMessage->isshot = isshot;
+		
 		theSceneEditor.player->inputMessage->input_sum = sum;
 		return;
 	}

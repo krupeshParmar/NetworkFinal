@@ -19,6 +19,7 @@ SceneEditor::~SceneEditor()
 
 bool SceneEditor::InitSceneRender(GLFWwindow* window)
 {
+	physicsSystem = PhysicsSystem();
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& imGuiIO = ImGui::GetIO();
@@ -41,12 +42,16 @@ void SceneEditor::ProcessInput(GLFWwindow* window)
 		FinishGameScene();
 		std::cout << "Gameplay finished";
 	}
+	bool isshot = false;
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS
 		|| glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
 		const glm::vec2 click(xpos, ypos);
-		//ClickObject(click);
-		//mouseClicked = true;
+		if (!mouseClicked)
+		{
+			ClickObject(click);
+			mouseClicked = true;
+		}
 	}
 	else mouseClicked = false;
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
@@ -161,7 +166,6 @@ void SceneEditor::CreateNewGameObject()
 	selectedGameObject = gameObject;
 }
 
-
 GameObject* SceneEditor::CreateNewGameObject(std::string name)
 {
 	GameObject* gameObject = new GameObject();
@@ -190,10 +194,6 @@ void SceneEditor::DeleteGameObjects(std::vector<GameObject*> gameobjectList)
 void SceneEditor::GamePlayUpdate(GLFWwindow* window)
 {
 	player->inputMessage->messageID = glfwGetTime();
-	/*player->message->bulx = player->bullet->transform->position.x;
-	player->message->bulz = player->bullet->transform->position.z;
-	player->message->posx = player->player->transform->position.x;
-	player->message->posz = player->player->transform->position.z;*/
 	player->inputMessage->count = player->client->g_MessageSendCount++;
 	player->inputMessage->id = player->client->GetID();
 	if (player->client->SendUpdateToServer(*player->inputMessage))
@@ -201,13 +201,224 @@ void SceneEditor::GamePlayUpdate(GLFWwindow* window)
 		player->client->waitForInputToBeSentToServer = false;
 	}
 	player->Update(deltaTime);
-	if(player->client->CheckForUpdateFromGameServer())
+	physicsSystem.UpdateStep(deltaTime);
+	for (int i = 0; i < list_Enemies.size(); i++)
+		list_Enemies[i]->Update(deltaTime);
+	if (player->client->CheckForUpdateFromGameServer())
 	{
-		player->client->px = player->client->g_ServerGameState.player1.posx;
-		player->client->pz = player->client->g_ServerGameState.player1.posz;
+		if (player->client->GetID() == -1)
+			return;
+		if (player->client->GetID() == 0)
+		{
+			player->client->px = player->client->g_ServerGameState.player1.posx;
+			player->client->pz = player->client->g_ServerGameState.player1.posz;
+			if (player->client->g_ServerGameState.player1.died)
+				player->client->dead = true;
+			for (int i = 0; i < list_Enemies.size(); i++)
+			{
+				if (i == 0)
+				{
+					if (player->client->g_ServerGameState.player2.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 1;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player2.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player2.posz;
+						if (player->client->g_ServerGameState.player2.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 1)
+				{
+					if (player->client->g_ServerGameState.player3.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 2;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player3.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player3.posz;
+						if (player->client->g_ServerGameState.player3.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 2)
+				{
+					if (player->client->g_ServerGameState.player4.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 3;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player4.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player4.posz;
+						if (player->client->g_ServerGameState.player4.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+			}
+		}
+		if (player->client->GetID() == 1)
+		{
+			player->client->px = player->client->g_ServerGameState.player2.posx;
+			player->client->pz = player->client->g_ServerGameState.player2.posz;
+			if (player->client->g_ServerGameState.player2.died)
+				player->client->dead = true;
+			for (int i = 0; i < list_Enemies.size(); i++)
+			{
+				list_Enemies[i]->object->enabled = true;
+				if (i == 0)
+				{
+					if (player->client->g_ServerGameState.player1.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 0;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player1.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player1.posz;
+						if (player->client->g_ServerGameState.player1.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 1)
+				{
+					if (player->client->g_ServerGameState.player3.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 2;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player3.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player3.posz;
+						if (player->client->g_ServerGameState.player3.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 2)
+				{
+					if (player->client->g_ServerGameState.player4.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 3;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player4.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player4.posz;
+						if (player->client->g_ServerGameState.player4.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+			}
+		}
+		if (player->client->GetID() == 2)
+		{
+			player->client->px = player->client->g_ServerGameState.player3.posx;
+			player->client->pz = player->client->g_ServerGameState.player3.posz;
+			if (player->client->g_ServerGameState.player3.died)
+				player->client->dead = true;
+			for (int i = 0; i < list_Enemies.size(); i++)
+			{
+				if (i == 0)
+				{
+					if (player->client->g_ServerGameState.player1.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 0;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player1.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player1.posz;
+						if (player->client->g_ServerGameState.player1.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 1)
+				{
+					if (player->client->g_ServerGameState.player2.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 1;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player2.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player2.posz;
+						if (player->client->g_ServerGameState.player2.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 2)
+				{
+					if (player->client->g_ServerGameState.player4.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 3;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player4.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player4.posz;
+						if (player->client->g_ServerGameState.player4.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+			}
+		}
+		if (player->client->GetID() == 3)
+		{
+			player->client->px = player->client->g_ServerGameState.player4.posx;
+			player->client->pz = player->client->g_ServerGameState.player4.posz;
+			if (player->client->g_ServerGameState.player4.died)
+				player->client->dead = true;
+			for (int i = 0; i < list_Enemies.size(); i++)
+			{
+				if (i == 0)
+				{
+					if (player->client->g_ServerGameState.player1.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 3;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player1.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player1.posz;
+						if (player->client->g_ServerGameState.player1.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 1)
+				{
+					if (player->client->g_ServerGameState.player2.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 1;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player2.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player2.posz;
+						if (player->client->g_ServerGameState.player2.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+				if (i == 2)
+				{
+					if (player->client->g_ServerGameState.player3.id != -1)
+					{
+						list_Enemies[i]->object->enabled = true;
+						list_Enemies[i]->ID = 3;
+						list_Enemies[i]->px = player->client->g_ServerGameState.player3.posx;
+						list_Enemies[i]->pz = player->client->g_ServerGameState.player3.posz;
+						if (player->client->g_ServerGameState.player3.died)
+							list_Enemies[i]->dead = true;
+						else
+							list_Enemies[i]->dead = false;
+					}
+				}
+			}
+		}
 	}
 }
-
 void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 {
 	glfwGetWindowSize(window,&SCR_WIDTH, &SCR_HEIGHT);
@@ -224,8 +435,8 @@ void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 		float currentFfame = glfwGetTime();
 		deltaTime = currentFfame - lastFrame;
 		lastFrame = currentFfame;
-
-		if(!gamePlay)ProcessInput(window);
+		player->inputMessage->isshot = -1;
+		ProcessInput(window);
 
 		::g_pTheLightManager->CopyLightInformationToShader(shaderID);
 
@@ -371,6 +582,7 @@ void SceneEditor::RenderScene(GLFWwindow* window, GLuint shaderID)
 				}
 			}
 		}
+		this->physicsSystem.Update(deltaTime);
 		this->RenderUI(window,shaderID); 
 		if (gamePlay)
 		{
@@ -428,7 +640,7 @@ void SceneEditor::RenderUI(GLFWwindow* window,GLuint shaderID)
 	{
 		if (gamePlay)
 		{
-			//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			InitGameScene();
 			std::cout << "Gameplay stareted";
 		}
@@ -760,6 +972,7 @@ void SceneEditor::RenderUI(GLFWwindow* window,GLuint shaderID)
 			if (ImGui::IsItemClicked())
 			{
 				RigidBody* rigidbody = new RigidBody();
+				physicsSystem.m_GameObjects.push_back(selectedGameObject);
 				selectedGameObject->components.push_back(rigidbody);
 			}
 		}
@@ -820,8 +1033,26 @@ bool SceneEditor::ClickObject(glm::vec2 pos, bool hover)
 	cursorPositionOnScreenSpace.y = SCR_HEIGHT / 2;
 	// Calculate our position in world space
 	glm::vec3 pointInWorldSpace = glm::unProject(cursorPositionOnScreenSpace, viewMatrix, projectionMatrix, viewport);
-
+	
+	Ray ray(mainCamera->transform->position, pointInWorldSpace);
 	GameObject* gameObject;
+
+	if (this->physicsSystem.RayCastClosest(ray, &gameObject, list_GameObjects))
+	{
+		if (gamePlay)
+		{
+			for (int i = 0; i < list_Enemies.size(); i++)
+			{
+				if (list_Enemies[i]->object == gameObject)
+				{
+					player->inputMessage->isshot = list_Enemies[i]->ID;
+					
+				}
+			}
+		}
+		//selectedGameObject = gameObject;
+	}
+
 
 	return false;
 }
@@ -1486,6 +1717,7 @@ bool SceneEditor::LoadSceneFile(cVAOManager* pVAOManager, GLuint shaderID)
 								}
 							}
 							gameObject->components.push_back(rigidbody);
+							physicsSystem.m_GameObjects.push_back(gameObject);
 						}
 						if (componentNodeName == "boxcollider")
 						{
@@ -1670,6 +1902,19 @@ bool SceneEditor::LoadSceneFile(cVAOManager* pVAOManager, GLuint shaderID)
 
 	player->player = GetGameObjectByName("Camera");
 	player->bullet = GetGameObjectByName("bullet");
+	EnemyPlayer* enemy1 = new EnemyPlayer();
+	enemy1->object = GetGameObjectByName("player2");
+	enemy1->object->enabled = false;
+	EnemyPlayer* enemy2 = new EnemyPlayer();
+	enemy2->object = GetGameObjectByName("player3");
+	enemy2->object->enabled = false;
+	EnemyPlayer* enemy3 = new EnemyPlayer();
+	enemy3->object = GetGameObjectByName("player4");
+	enemy3->object->enabled = false;
+	list_Enemies.push_back(enemy1);
+	list_Enemies.push_back(enemy2);
+	list_Enemies.push_back(enemy3);	
+	
 	player->client->px = player->player->transform->position.x;
 	player->client->pz = player->player->transform->position.z;
 	player->client->bz = player->bullet->transform->position.z;

@@ -20,18 +20,19 @@ struct Message {
 };
 
 struct PlayerStateMessage : public Message {
-	double id;
+	double id = -1;
 	int count;
 	float posx, posz;
 	float bulx, bulz;
+	bool died = false;
 	//int input_sum;
 	//bool isshot;
 };
 struct InputMessage : public Message {
-	double id;
+	int id;
 	int count;
 	int input_sum;
-	bool isshot;
+	int isshot;
 };
 
 struct GameState : public Message

@@ -15,7 +15,7 @@ Client::Client()
 	, m_NextRecvTime(0)
 	, m_CurrentTime(0)
 {
-	this->ID = time(NULL);
+	this->ID = -1;
 }
 
 Client::~Client()
@@ -195,7 +195,12 @@ bool Client::CheckForUpdateFromGameServer()
 	std::cout << "GameState: " << game_state << std::endl;
 	std::string ch = "s";*/
 	memcpy(&g_ServerGameState, (const void*)buf, sizeof(GameState));
-	std::cout << "Player1 px: " << g_ServerGameState.player1.posx << ", px: " << g_ServerGameState.player1.posz << std::endl;
+	if (g_ServerGameState.messageID == 1)
+	{
+		this->ID = g_ServerGameState.player1.id;
+		std::cout << "I have " << this->ID << " ID" << std::endl;
+	}
+	//std::cout << "Player1 px: " << g_ServerGameState.player1.posx << ", px: " << g_ServerGameState.player1.posz << std::endl;
 	return true;
 	/*
 	while (ch != "!" && ch != "")
@@ -249,8 +254,6 @@ bool Client::CheckForUpdateFromGameServer()
 		}
 	}
 	*/
-
-	return true;
 }
 
 void Client::Update(float deltaTime)
